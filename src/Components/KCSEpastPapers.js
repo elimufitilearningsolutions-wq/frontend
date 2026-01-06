@@ -6,9 +6,9 @@ import ExamsList from './ExamsListPerYear';
 const KCSEpastPapers = ({ isLoggedIn, clearToken }) => {
     const items = [
         
-        { name: 'KCSE PAST PAPERS 2023 ', year: 2023, bgColor: 'rgba(0, 0, 0, 0.1)', textColor: 'rgb(0, 0, 0)', path: "secondary", value: "kcse/past/papers" },
-        { name: 'KCSE PAST PAPERS 2022 ', year: 2022, bgColor: 'rgba(0, 0, 0, 0.2)', textColor: 'rgb(0, 0, 0)', path: "secondary", value: "kcse/past/papers" },
-        { name: 'KCSE PAST PAPERS 2021 ', year: 2021, bgColor: 'rgba(0, 0, 0, 0.1)', textColor: 'rgb(0, 0, 0)', path: "secondary", value: "kcse/past/papers" }
+        { name: 'KCSE PAST PAPERS 2026 ', year: 2026, bgColor: 'rgba(0, 0, 0, 0.1)', textColor: 'rgb(0, 0, 0)', path: "secondary", value: "kcse/past/papers" },
+        { name: 'KCSE PAST PAPERS 2025 ', year: 2025, bgColor: 'rgba(0, 0, 0, 0.2)', textColor: 'rgb(0, 0, 0)', path: "secondary", value: "kcse/past/papers" },
+        { name: 'KCSE PAST PAPERS 2024 ', year: 2024, bgColor: 'rgba(0, 0, 0, 0.1)', textColor: 'rgb(0, 0, 0)', path: "secondary", value: "kcse/past/papers" }
     ];
 
     return (

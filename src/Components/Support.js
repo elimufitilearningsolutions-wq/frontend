@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { prePrimaryItems, primaryItems, jssItems, secondaryItems } from './schoolItems.js';
+import {
+    prePrimaryItems,
+    primaryItems,
+    jssItems,
+    secondaryItems
+} from './schoolItems.js';
 import config from '../config.js';
 
+/* =======================
+   CATEGORY → TABLE MAP
+======================= */
 const categoryTableMap = {
     "create/schemes": "schemes",
     "create/notes": "notes",
@@ -26,6 +34,9 @@ const categoryTableMap = {
     "create/holiday/assignments": "holiday_assignments"
 };
 
+/* =======================
+   ALLOWED FILE TYPES
+======================= */
 const allowedFileExtensions = [
     '.pdf', '.docx', '.doc', '.xlsx', '.xls', '.pptx', '.ppt',
     '.txt', '.rtf', '.csv', '.jpg', '.jpeg', '.png', '.gif',
@@ -35,6 +46,9 @@ const allowedFileExtensions = [
 ];
 
 const Support = () => {
+    /* =======================
+       STATE
+    ======================= */
     const [values, setValues] = useState({
         form: "",
         examMS: "",
@@ -43,7 +57,7 @@ const Support = () => {
         year: "",
         set: "",
         grade: "",
-        files: []  // Change from file to files
+        files: []
     });
 
     const [path, setPath] = useState("");
@@ -56,6 +70,9 @@ const Support = () => {
     const [showForm, setShowForm] = useState(false);
     const [items, setItems] = useState(null);
 
+    /* =======================
+       HANDLERS
+    ======================= */
     const handleInput = (e) => {
         const { name, value } = e.target;
         setValues(prev => ({ ...prev, [name]: value }));
@@ -63,15 +80,16 @@ const Support = () => {
 
     const handleFileChange = (e) => {
         const selectedFiles = Array.from(e.target.files);
+
         const validFiles = selectedFiles.filter(file => {
-            const fileName = file.name;
-            const fileExtension = fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
-            return allowedFileExtensions.includes(fileExtension);
+            const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+            return allowedFileExtensions.includes(ext);
         });
 
+        // IMPORTANT: replace files (do not append)
         setValues(prev => ({
             ...prev,
-            files: [...prev.files, ...validFiles]  // Append new valid files to existing array
+            files: validFiles
         }));
     };
 
@@ -84,8 +102,9 @@ const Support = () => {
     const handleClick = (e) => {
         const selectedPath = e.target.getAttribute("name");
         const schemaPath = e.target.getAttribute("schema");
-        setSchema(schemaPath);
+
         setPath(selectedPath);
+        setSchema(schemaPath);
         setShowForm(true);
 
         const itemsMap = {
@@ -94,33 +113,42 @@ const Support = () => {
             "jss": jssItems,
             "secondary": secondaryItems
         };
+
         setItems(itemsMap[selectedPath] || null);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         setLoading(true);
         setErrorMessage("");
         setSuccessMessage("");
 
         const formData = new FormData();
+
         Object.entries(values).forEach(([key, value]) => {
             if (Array.isArray(value)) {
-                value.forEach(file => formData.append(key, file));  // Append each file
+                value.forEach(file => formData.append(key, file));
             } else {
                 formData.append(key, value);
             }
         });
+
         formData.append('schema', schema);
         formData.append('table', table);
         formData.append('category', category);
 
         try {
             const apiUrl = config.API_BASE_URL;
-            console.log(`Submitting to: ${apiUrl}/${path}/${category}`);
-            const response = await axios.post(`${apiUrl}/${path}/${category}`, formData);
+            const endpoint = `${apiUrl}/${path}/${category}`;
+
+            console.log(`Submitting to: ${endpoint}`);
+
+            const response = await axios.post(endpoint, formData);
+
             setSuccessMessage(response.data.message);
             resetForm();
+
             setTimeout(() => setSuccessMessage(""), 3000);
         } catch (error) {
             console.error("Error submitting form:", error);
@@ -140,16 +168,20 @@ const Support = () => {
             year: "",
             set: "",
             grade: "",
-            files: []  // Reset files to empty array
+            files: []
         });
     };
 
+    /* =======================
+       RENDER
+    ======================= */
     return (
         <div className="row bgs">
             <ul className="row list-group-flush py-3 bg-success text-white">
                 <li className="col-12 col-md-auto list-group-item text-center">
                     <p className="text-info m-0">CREATE RESOURCES</p>
                 </li>
+
                 {["pre/primary", "primary", "jss", "secondary"].map((item, index) => (
                     <li
                         key={index}
@@ -165,17 +197,18 @@ const Support = () => {
             </ul>
 
             <div className="d-flex justify-content-center">
-                <h4>{path && <h4>{path}</h4>}</h4>
+                {path && <h4>{path}</h4>}
             </div>
-            <div className='row'>
-                {loading && <div className='loader'></div>}
+
+            <div className="row">
+                {loading && <div className="loader"></div>}
+
                 <div className={`${showForm ? "d-flex justify-content-center" : "d-none"}`}>
                     <select
-                        className='custom-select width-fit-content px-5 rounded bg-primary text-white'
-                        id="categoryDropdown"
+                        className="custom-select width-fit-content px-5 rounded bg-primary text-white"
                         name="category"
-                        onChange={handleCategoryChange}
                         value={category}
+                        onChange={handleCategoryChange}
                     >
                         <option value="">Select Category</option>
                         {Object.keys(categoryTableMap).map(key => (
@@ -183,19 +216,20 @@ const Support = () => {
                                 {categoryTableMap[key]
                                     .replace(/_/g, ' ')
                                     .toLowerCase()
-                                    .replace(/\b\w/g, char => char.toUpperCase())
-                                }
+                                    .replace(/\b\w/g, c => c.toUpperCase())}
                             </option>
                         ))}
                     </select>
                 </div>
+
                 <div className={`d-flex justify-content-center vh-100 position-relative ${showForm ? "" : "d-none"}`}>
-                    <form onSubmit={handleSubmit} className='bg-white'>
-                        {["examMS", "set", "grade", "form", "term", "year", "subject"].map((field, index) => (
-                            <div key={index}>
-                                <label htmlFor={field} className="form-label ms-1">
+                    <form onSubmit={handleSubmit} className="bg-white">
+                        {["examMS", "set", "grade", "form", "term", "year", "subject"].map((field) => (
+                            <div key={field}>
+                                <label className="form-label ms-1">
                                     <strong>{field.charAt(0).toUpperCase() + field.slice(1)}</strong>
                                 </label>
+
                                 {field === "examMS" ? (
                                     <select
                                         className="form-select py-0"
@@ -212,35 +246,32 @@ const Support = () => {
                                         type="text"
                                         className="form-control py-0"
                                         name={field}
-                                        placeholder={`Enter ${field.charAt(0).toUpperCase() + field.slice(1)}`}
                                         value={values[field]}
                                         onChange={handleInput}
+                                        placeholder={`Enter ${field}`}
                                     />
                                 )}
                             </div>
                         ))}
+
                         <div>
-                            <label htmlFor="files" className="form-label ms-1"><strong>Files</strong></label>
+                            <label className="form-label ms-1"><strong>Files</strong></label>
                             <input
                                 type="file"
                                 className="form-control py-0"
-                                name="files"
                                 multiple
                                 onChange={handleFileChange}
                             />
-                            {/*<ul className="list-group mt-2">
-                                {values.files.map((file, index) => (
-                                    <li key={index} className="list-group-item">{file.name}</li>
-                                ))}
-                            </ul>*/}
                         </div>
+
                         <div className="d-flex justify-content-center my-3">
                             <button type="submit" className="btn btn-success" disabled={loading}>
                                 {loading ? "Submitting..." : "Submit"}
                             </button>
                         </div>
-                        <div className={`text-center text-danger`}>{errorMessage && <p>{errorMessage}</p>}</div>
-                        <div className={`text-center text-success`}>{successMessage && <p>{successMessage}</p>}</div>
+
+                        {errorMessage && <div className="text-center text-danger"><p>{errorMessage}</p></div>}
+                        {successMessage && <div className="text-center text-success"><p>{successMessage}</p></div>}
                     </form>
                 </div>
             </div>

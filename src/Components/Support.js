@@ -62,8 +62,9 @@ const Support = () => {
 
     const [path, setPath] = useState("");
     const [schema, setSchema] = useState("");
+    const [categoryPath, setCategoryPath] = useState("");
     const [table, setTable] = useState("");
-    const [category, setCategory] = useState("");
+
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -86,7 +87,6 @@ const Support = () => {
             return allowedFileExtensions.includes(ext);
         });
 
-        // IMPORTANT: replace files (do not append)
         setValues(prev => ({
             ...prev,
             files: validFiles
@@ -94,9 +94,10 @@ const Support = () => {
     };
 
     const handleCategoryChange = (e) => {
-        const selectedCategory = e.target.value;
-        setCategory(selectedCategory);
-        setTable(categoryTableMap[selectedCategory] || "");
+        const selected = e.target.value;
+        console.log("selected target", selected)
+        setCategoryPath(selected);
+        setTable(categoryTableMap[selected] || "");
     };
 
     const handleClick = (e) => {
@@ -120,6 +121,11 @@ const Support = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!schema || !table || !categoryPath) {
+            setErrorMessage("Schema, category or table missing");
+            return;
+        }
+
         setLoading(true);
         setErrorMessage("");
         setSuccessMessage("");
@@ -134,26 +140,23 @@ const Support = () => {
             }
         });
 
-        formData.append('schema', schema);
-        formData.append('table', table);
-        formData.append('category', category);
+        formData.append("schema", schema);
+        formData.append("table", table);
+
+        const apiUrl = config.API_BASE_URL;
+        const endpoint = `${apiUrl}/${path}/${categoryPath}`;
+
+        console.log("🚀 Endpoint:", endpoint);
+        console.log("📌 Schema:", schema);
+        console.log("📌 Table:", table);
 
         try {
-            const apiUrl = config.API_BASE_URL;
-            const endpoint = `${apiUrl}/${path}/${category}`;
-
-            console.log(`Submitting to: ${endpoint}`);
-
             const response = await axios.post(endpoint, formData);
-
-            setSuccessMessage(response.data.message);
+            setSuccessMessage(response.data.message || "Upload successful");
             resetForm();
-
-            setTimeout(() => setSuccessMessage(""), 3000);
         } catch (error) {
-            console.error("Error submitting form:", error);
-            setErrorMessage("An error occurred while submitting the form. Please try again later.");
-            setTimeout(() => setErrorMessage(""), 5000);
+            console.error("Submission error:", error);
+            setErrorMessage("An error occurred while submitting the form.");
         } finally {
             setLoading(false);
         }
@@ -206,8 +209,7 @@ const Support = () => {
                 <div className={`${showForm ? "d-flex justify-content-center" : "d-none"}`}>
                     <select
                         className="custom-select width-fit-content px-5 rounded bg-primary text-white"
-                        name="category"
-                        value={category}
+                        value={categoryPath}
                         onChange={handleCategoryChange}
                     >
                         <option value="">Select Category</option>
@@ -224,7 +226,7 @@ const Support = () => {
 
                 <div className={`d-flex justify-content-center vh-100 position-relative ${showForm ? "" : "d-none"}`}>
                     <form onSubmit={handleSubmit} className="bg-white">
-                        {["examMS", "set", "grade", "form", "term", "year", "subject"].map((field) => (
+                        {["examMS", "set", "grade", "form", "term", "year", "subject"].map(field => (
                             <div key={field}>
                                 <label className="form-label ms-1">
                                     <strong>{field.charAt(0).toUpperCase() + field.slice(1)}</strong>

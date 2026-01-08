@@ -68,21 +68,23 @@ const Subscribe = ({ userId }) => {
                             <form onSubmit={handleSubmit}>
                             <div className="mb-3">
                             <label htmlFor="amount" className="form-label">Amount:</label>
-                            <select
+                                <input
+                                type="number"
                                 id="amount"
-                                className="form-select " 
+                                name="amount"
+                                className="form-control mt-2"
                                 value={formData.amount}
                                 onChange={handleChange}
+                                placeholder="Preferred amount (KES)"
+                                min="10"
                                 required
-                            >
-                                <option value="">Select Subscription & Fee</option>
-                                <option value="1">1 - 1 day</option>
-                                <option value="200">200 - 1 Month</option>
-                                <option value="500">500 - 3 Months</option>
-                                <option value="1000">1000 - 6 Months</option>
-                                <option value="1800">1800 - 1 Year</option>
-                                <option value="10000">10000 - Development</option>
-                            </select>
+                                />
+
+                                <small className="text-muted d-block mt-1">
+                                Minimum KES 10
+                                </small>
+
+
                         </div>
 
 

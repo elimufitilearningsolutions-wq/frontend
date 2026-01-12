@@ -78,6 +78,14 @@ import Footer2 from './Components/Footer2';
 import ResourceLinks from './Components/ResourceLinks';
 import Careers from './Components/Careers';
 import DPTENotes from './Components/DPTENOTES';
+import Grade10Examinations from './Components/Grade10Examinations';
+import Grade10ExaminationsDownload from './Components/Grade10ExaminationsDownloads';
+import SeniorSchoolSchemes from './Components/SeniorSchoolschemes';
+import SeniorSchoolSchemesDownload from './Components/SeniorSchoolschemesDownload';
+import SeniorSchoolCurriculumDesign from './Components/SeniorSChoolCurriculumDedign';
+import SeniorSchoolCurriculumDesignDownloads from './Components/SeniorSchoolCurriculumDesignDownloads';
+import SeniorSchoolNotes from './Components/SeniorSchoolNotes';
+import SeniorSchoolNotesDownloads from './Components/SeniorSchoolNotesDownloads';
 
 
 const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIsLoggedIn, setUserId, setShowModal }) => (
@@ -290,6 +298,111 @@ const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIs
         path="/primary/revision/notes/downloads" 
         element={<PrimaryRevisionNotesDownload isAdmin={isAdmin} userId={userId} isLoggedIn={isLoggedIn} clearToken={clearToken} isSubscribed={isSubscribed}/>}
         />
+
+        {/*SENIOR*/}
+       <Route
+  path="/grade10/examinations"
+  element={
+    <Grade10Examinations
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+       <Route
+  path="/grade10/examinations/downloads"
+  element={
+    <Grade10ExaminationsDownload
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+       <Route
+  path="/senior/school/schemes"
+  element={
+    <SeniorSchoolSchemes
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+       <Route
+  path="/senior/school/schemes/downloads"
+  element={
+    <SeniorSchoolSchemesDownload
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+
+
+<Route
+  path="/senior/school/curriculum/designs"
+  element={
+    <SeniorSchoolCurriculumDesign
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+
+<Route
+  path="/senior/school/curriculum/design/downloads"
+  element={
+    <SeniorSchoolCurriculumDesignDownloads
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+<Route
+  path="/senior/school/notes"
+  element={
+    <SeniorSchoolNotes
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+
+<Route
+  path="/senior/school/notes/downloads"
+  element={
+    <SeniorSchoolNotesDownloads
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+
+
+
 
         {/*SECONDARY*/}
         <Route         

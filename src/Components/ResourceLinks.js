@@ -6,6 +6,7 @@ import {
   schoolTittles,
   secondaryItems,
   jssItems,
+  seniorSchoolItems,
   teachersCollageItems,
 } from "./schoolItems.js";
 import config from "../config.js";
@@ -64,6 +65,10 @@ const ResourceLinks = ({ isAdmin, userId, isLoggedIn, clearToken }) => {
       case "/jss/holiday/assignments":
       case "/jss/notes":
       case "/jss/schemes":
+      case "/senior/school/schemes":
+      case "/grade10/examinations":
+      case "/senior/school/notes":
+      case "/senior/school/curriculum/designs":
       case "/pre/primary/schemes":
       case "/pre/primary/curriculum/designs":
       case "/pre/primary/holiday/assignments":
@@ -121,6 +126,13 @@ const ResourceLinks = ({ isAdmin, userId, isLoggedIn, clearToken }) => {
         <header className=" schoolTittle">{schoolTittles.jss}</header>
         <ul className={`list-group pt-4 pb-4 border-0`}    >
           {renderListItems(jssItems)}
+        </ul>
+      </div>
+
+      <div className="w-100 d-flex flex-column align-items-center custom-background-jss">
+        <header className=" schoolTittle">{schoolTittles.senior}</header>
+        <ul className={`list-group pt-4 pb-4 border-0`}    >
+          {renderListItems(seniorSchoolItems)}
         </ul>
       </div>
 

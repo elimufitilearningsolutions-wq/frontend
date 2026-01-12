@@ -4,6 +4,7 @@
         primary:'PRIMARY SECTION',
        jss: 'JUNIOR SECONDARY SCHOOL SECTION',
         secondary:'SECONDARY SCHOOL SECTION',
+        senior: "SENIOR SCHOOL SECTION",
         teachersCollage:'COLLAGE & UNIVERSITY'
    }
         
@@ -14,10 +15,10 @@
         { label: "PLAYGROUP EXAMS", value: "/play/group/exams", path: "pre/primary" },
         { label: "PP1 EXAMS", value: "/pp1/exams" , path: "pre/primary"},
         { label: "PP2 EXAMS", value: "/pp2/exams" , path: "pre/primary"},
-        { label: "PRE-PRIMARY HOLIDAY REVISIONS", value: "/pre/primary/holiday/assignments" , path: "pre/primary"},
-        
+        { label: "PRE-PRIMARY HOLIDAY REVISIONS", value: "/pre/primary/holiday/assignments" , path: "pre/primary"},       
         
     ]
+
    export  const primaryItems = [
         { label: "PRIMARY SCHEMES OF WORK", value: "/primary/schemes",path: "primary" },
         { label: "PRIMARY CURRICULUM DESIGNS", value: "/primary/curriculum/designs" ,path: "primary"},
@@ -32,6 +33,7 @@
         { label: "PRIMARY HOLIDAY ASSIGNMENTS   ", value: "/primary/holiday/assignments" ,path: "primary"},
         
     ]
+
 export const jssItems = [
         { label: "JUNIOR SCHOOL SCHEMES OF WORK ", value: "/jss/schemes",path: "jss" },
         { label: "JUNIOR SCHOOL ASSESSMENT TOOLS  ", value: "/jss/assessment/tools" ,path: "jss"},
@@ -42,6 +44,15 @@ export const jssItems = [
         { label: "JUNIOR SCHOOL HOLIDAY ASSIGNMENTS   ", value: "/jss/holiday/assignments" ,path: "jss"}
        
 ]
+export const seniorSchoolItems = [
+        { label: "SENIOR SCHOOL SCHEMES OF WORK ", value: "/senior/school/schemes",path: "senior" },       
+        { label: "GRADE 10 EXAMINATIONS  ", value: "/grade10/examinations" ,path: "senior"},        
+        { label: "SENIOR SCHOOL CURRICULUM DESIGNS  ", value: "/senior/school/curriculum/designs" ,path: "senior"},
+        { label: "SENIOR SCHOOL NOTES  ", value: "/senior/school/notes" ,path: "senior"},        
+    
+       
+]
+
 export const secondaryItems = [
        { label: "SECONDARY FULL SET EXAMINATIONS ", value: "/secondary/fullset/examinations" ,path: "secondary"},
        { label: "SECONDARY SCHEMES OF WORK  ",  value: "/secondary/schemes",path: "secondary"},

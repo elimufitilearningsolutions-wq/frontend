@@ -4,6 +4,7 @@ import {
     prePrimaryItems,
     primaryItems,
     jssItems,
+    seniorSchoolItems,
     secondaryItems
 } from './schoolItems.js';
 import config from '../config.js';
@@ -30,6 +31,10 @@ const categoryTableMap = {
     "create/grade4/exam": "grade4_exams",
     "create/grade5/exam": "grade5_exams",
     "create/grade6/exam": "grade6_exams",
+    "create/grade7/exam": "grade7_exams",
+    "create/grade8/exam": "grade8_exams",
+    "create/grade9/exam": "grade9_exams",
+    "create/grade10/exams": "grade10_exams",
     "create/assessment/tools": "assessment_tools",
     "create/holiday/assignments": "holiday_assignments"
 };
@@ -38,12 +43,29 @@ const categoryTableMap = {
    ALLOWED FILE TYPES
 ======================= */
 const allowedFileExtensions = [
-    '.pdf', '.docx', '.doc', '.xlsx', '.xls', '.pptx', '.ppt',
-    '.txt', '.rtf', '.csv', '.jpg', '.jpeg', '.png', '.gif',
-    '.bmp', '.tiff', '.zip', '.rar', '.7z', '.tar', '.gz',
-    '.mp3', '.wav', '.mp4', '.mov', '.avi', '.mkv', '.flv',
-    '.html', '.htm', '.css', '.js', '.json', '.xml'
+  // 📄 Documents
+  '.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx',
+  '.txt', '.rtf', '.csv', '.odt', '.ods', '.odp',
+
+  // 🖼 Images
+  '.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp', '.svg',
+
+  // 🎵 Audio
+  '.mp3', '.wav', '.aac', '.ogg', '.flac', '.m4a',
+
+  // 🎬 Video
+  '.mp4', '.mov', '.avi', '.mkv', '.flv', '.wmv', '.webm', '.3gp',
+
+  // 🗜 Archives
+  '.zip', '.rar', '.7z', '.tar', '.gz', '.bz2',
+
+  // 💻 Code / Data
+  '.html', '.htm', '.css', '.js', '.json', '.xml', '.yaml', '.yml',
+
+  // 📦 Disk / Binary (use carefully)
+  '.img', '.iso'
 ];
+
 
 const Support = () => {
     /* =======================
@@ -112,6 +134,7 @@ const Support = () => {
             "pre/primary": prePrimaryItems,
             "primary": primaryItems,
             "jss": jssItems,
+            "senior/school":seniorSchoolItems,
             "secondary": secondaryItems
         };
 
@@ -185,7 +208,7 @@ const Support = () => {
                     <p className="text-info m-0">CREATE RESOURCES</p>
                 </li>
 
-                {["pre/primary", "primary", "jss", "secondary"].map((item, index) => (
+                {["pre/primary", "primary", "jss","senior/school", "secondary"].map((item, index) => (
                     <li
                         key={index}
                         name={item}

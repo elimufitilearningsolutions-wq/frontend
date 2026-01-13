@@ -14,6 +14,7 @@ import config from '../config.js';
 ======================= */
 const categoryTableMap = {
     "create/schemes": "schemes",
+    "create/lesson/plans": "lesson_plans",
     "create/notes": "notes",
     "create/curriculum/designs": "curriculum_designs",
     "create/grade7/examinations": "grade7_examinations",

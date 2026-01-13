@@ -65,6 +65,7 @@ const ResourceLinks = ({ isAdmin, userId, isLoggedIn, clearToken }) => {
       case "/jss/holiday/assignments":
       case "/jss/notes":
       case "/jss/schemes":
+      case "/jss/lesson/plans":
       case "/senior/school/schemes":
       case "/grade10/examinations":
       case "/senior/school/notes":

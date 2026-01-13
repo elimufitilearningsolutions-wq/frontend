@@ -86,6 +86,8 @@ import SeniorSchoolCurriculumDesign from './Components/SeniorSChoolCurriculumDed
 import SeniorSchoolCurriculumDesignDownloads from './Components/SeniorSchoolCurriculumDesignDownloads';
 import SeniorSchoolNotes from './Components/SeniorSchoolNotes';
 import SeniorSchoolNotesDownloads from './Components/SeniorSchoolNotesDownloads';
+import JssLessonPlans from './Components/JssLessonPlan';
+import JssLessonPlanDownloads from './Components/JssLessonPlanDownloads';
 
 
 const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIsLoggedIn, setUserId, setShowModal }) => (
@@ -148,6 +150,34 @@ const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIs
         element={<PP2ExamsDownloads isAdmin={isAdmin} userId={userId} isLoggedIn={isLoggedIn} clearToken={clearToken} isSubscribed={isSubscribed}/>}   />
 
         {/*JUNIOR SCHOOL/ JSS ROUTES*/}
+
+
+        
+<Route
+  path="/jss/lesson/plans"
+  element={
+    <JssLessonPlans
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+
+<Route
+  path="/jss/lesson/plan/downloads"
+  element={
+    <JssLessonPlanDownloads
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
 
         <Route 
         path="/jss/assessment/tools" 
@@ -375,6 +405,7 @@ const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIs
     />
   }
 />
+
 <Route
   path="/senior/school/notes"
   element={

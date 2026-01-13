@@ -1,11 +1,11 @@
 /* Custom CSS for changing the color of the Bootstrap Icons toggle icon */
 .dropdown-toggle::after {
-    color: #178b76; /* Change this to your desired color */
+    color: #fff; /* Change this to your desired color */
   }
   /* Remove border-radius from dropdown menu */
 .dropdown-menu {
     border-radius: 0 !important;
-    background-color: #8cc751 !important;
+    background-color: #fff !important;
 }
 .dropdown-menu-li {
     border: 1px #ffffff !important;

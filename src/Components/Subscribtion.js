@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import config from "../config";
+import "../assets/subscription.css"
+
 
 const Subscribe = ({ userId }) => {
     const [formData, setFormData] = useState({
@@ -66,6 +68,14 @@ const Subscribe = ({ userId }) => {
                                 </div>
                             )}
                             <form onSubmit={handleSubmit}>
+                                <h2>How to subscribe</h2>
+                                <ol class="subscription-steps">
+                                <li>Enter your preferred amount</li>
+                                <li>Enter the phone number to pay with</li>
+                                <li>Click <strong>Submit</strong></li>
+                                <li>Confirm the payment on your phone by entering your PIN</li>
+                                </ol>
+
                             <div className="mb-3">
                             <label htmlFor="amount" className="form-label">Amount:</label>
                                 <input

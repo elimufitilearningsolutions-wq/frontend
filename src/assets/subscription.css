@@ -1,0 +1,34 @@
+.subscription-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: step;
+}
+
+.subscription-steps li {
+  counter-increment: step;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  background: #f8f9fc;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.subscription-steps li::before {
+  content: counter(step);
+  min-width: 32px;
+  height: 32px;
+  background: #4f46e5; /* primary color */
+  color: #fff;
+  font-weight: 600;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}

@@ -34,8 +34,8 @@ const Header2 = ({
           </li>
 
           <li className="nav-item d-none d-md-block">
-            <a className="nav-link text-white" href="/#howitworks">
-              How it works
+            <a className="nav-link text-white" href="/subscription">
+              Subscribe Now
             </a>
           </li>
 

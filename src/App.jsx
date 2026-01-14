@@ -71,13 +71,7 @@ const App = () => {
     }, [userId]);  
     
 
-    // Log when `isSubscribed` or `isAdmin` changes
-   /* useEffect(() => {
-        console.log("isSubscribed updated to:", isSubscribed);
-        console.log("isAdmin updated to:", isAdmin);
-        console.log("isLoggedIn updated to:", isLoggedIn);
-    }, [isSubscribed, isAdmin, isLoggedIn]);
-*/
+
     return (
         <BrowserRouter>
             <AppRoutes

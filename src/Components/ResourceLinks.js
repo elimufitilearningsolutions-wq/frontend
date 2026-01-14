@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 import {
   prePrimaryItems,
   primaryItems,
@@ -106,6 +107,17 @@ const ResourceLinks = ({ isAdmin, userId, isLoggedIn, clearToken }) => {
 
   return (
     <div className="container-fluid p-0 d-flex flex-column align-items-center ">
+       <Helmet>
+      <title>School Learning Resources in Kenya | Elimufiti</title>
+      <meta
+        name="description"
+        content="Explore CBC and CBE learning resources for Pre-Primary, Primary, Junior School, Senior School, and Secondary education in Kenya. Download schemes of work, lesson plans, exams, and revision materials."
+      />
+      <link
+        rel="canonical"
+        href="https://www.elimufiti.co.ke/school/resources"
+      />
+    </Helmet>
       <div className="w-100 d-flex flex-column align-items-center custom-background-pri">
         <header className="w-100 schoolTittle">{schoolTittles.prePrimary}</header>
         <ul className={`  list-group pt-4 pb-4  border-0 `}

@@ -6,7 +6,7 @@ const ThirdContent = () => {
         <div className="container-fluid bg-primary text-white p-5 third-container d-none d-md-block">
   <div className="row h-100">
     <div className="col-md-3  text-left h-100">
-      <img src={logo} alt="Image" className="img-fluid h-100 w-100 object-fit-cover custom-gradient-shadow animated-image" />
+      <img src={logo} alt="Job seeker illustration" className="img-fluid h-100 w-100 object-fit-cover custom-gradient-shadow animated-image" />
     </div>
 
     <div className="col-12 col-md-9 pt-2">

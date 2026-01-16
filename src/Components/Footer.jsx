@@ -12,7 +12,7 @@ const Footer = () => {
                         <ul className="list-unstyled">
                             <li>Email: info@elimufiti.co.ke</li>
                             <li>Phone: 0710 00 00</li>
-                            <li><a href="#" className="text-white">Whatsapp</a></li>
+                            <li className="text-white">  Whatsapp</li>
                         </ul>
                     </div>
                 </div>

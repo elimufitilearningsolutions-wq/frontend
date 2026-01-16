@@ -8,11 +8,11 @@ const VerticalNav = ({ onClick, isAdmin , userId, isLoggedIn, clearToken, isSubs
           </li>
           <li className="nav-item d-flex align-items-center">
           <span className="bi bi-gear-fill me-2"></span>
-            <a className="nav-link " href="#solutions">Solutions</a>
+            <a className="nav-link " href="/">Solutions</a>
           </li>
           <li className="nav-item dropdown d-flex align-items-center">
               <span className="bi bi-book me-2"></span>
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Resources
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -20,27 +20,27 @@ const VerticalNav = ({ onClick, isAdmin , userId, isLoggedIn, clearToken, isSubs
                   <a className="dropdown-item" href="/school/resources">School Resources</a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#job-opportunities">Job Opportunities</a>
+                  <a className="dropdown-item" href="/">Job Opportunities</a>
                 </li>
               </ul>
             </li>
 
           <li className="nav-item d-flex align-items-center">
           <span className="bi bi-info-circle me-2"></span>
-            <a className="nav-link" href="#about">About</a>
+            <a className="nav-link" href="/">About</a>
           </li>
 
           <li className="nav-item dropdown d-flex align-items-center">
           <span className="bi bi-envelope me-2"></span>
-          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Contact Us
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a className="dropdown-item" href="#email">Email: info@elimufiti.co.ke</a>
+                  <a className="dropdown-item" href="/">Email: info@elimufiti.co.ke</a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#tel">Tel: 0716880637</a>
+                  <a className="dropdown-item" href="/">Tel: 0716880637</a>
                 </li>
               </ul>
           </li>

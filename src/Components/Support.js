@@ -5,7 +5,7 @@ import {
     primaryItems,
     jssItems,
     seniorSchoolItems,
-    secondaryItems, 
+    secondaryItems,
     teachersCollageItems
 } from './schoolItems.js';
 import config from '../config.js';
@@ -49,29 +49,15 @@ const categoryTableMap = {
    ALLOWED FILE TYPES
 ======================= */
 const allowedFileExtensions = [
-  // 📄 Documents
-  '.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx',
-  '.txt', '.rtf', '.csv', '.odt', '.ods', '.odp',
-
-  // 🖼 Images
-  '.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp', '.svg',
-
-  // 🎵 Audio
-  '.mp3', '.wav', '.aac', '.ogg', '.flac', '.m4a',
-
-  // 🎬 Video
-  '.mp4', '.mov', '.avi', '.mkv', '.flv', '.wmv', '.webm', '.3gp',
-
-  // 🗜 Archives
-  '.zip', '.rar', '.7z', '.tar', '.gz', '.bz2',
-
-  // 💻 Code / Data
-  '.html', '.htm', '.css', '.js', '.json', '.xml', '.yaml', '.yml',
-
-  // 📦 Disk / Binary (use carefully)
-  '.img', '.iso'
+    '.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx',
+    '.txt', '.rtf', '.csv', '.odt', '.ods', '.odp',
+    '.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp', '.svg',
+    '.mp3', '.wav', '.aac', '.ogg', '.flac', '.m4a',
+    '.mp4', '.mov', '.avi', '.mkv', '.flv', '.wmv', '.webm', '.3gp',
+    '.zip', '.rar', '.7z', '.tar', '.gz', '.bz2',
+    '.html', '.htm', '.css', '.js', '.json', '.xml', '.yaml', '.yml',
+    '.img', '.iso'
 ];
-
 
 const Support = () => {
     /* =======================
@@ -97,7 +83,6 @@ const Support = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [showForm, setShowForm] = useState(false);
-    const [items, setItems] = useState(null);
 
     /* =======================
        HANDLERS
@@ -115,15 +100,11 @@ const Support = () => {
             return allowedFileExtensions.includes(ext);
         });
 
-        setValues(prev => ({
-            ...prev,
-            files: validFiles
-        }));
+        setValues(prev => ({ ...prev, files: validFiles }));
     };
 
     const handleCategoryChange = (e) => {
         const selected = e.target.value;
-        console.log("selected target", selected)
         setCategoryPath(selected);
         setTable(categoryTableMap[selected] || "");
     };
@@ -135,17 +116,6 @@ const Support = () => {
         setPath(selectedPath);
         setSchema(schemaPath);
         setShowForm(true);
-
-        const itemsMap = {
-            "pre/primary": prePrimaryItems,
-            "primary": primaryItems,
-            "jss": jssItems,
-            "senior/school":seniorSchoolItems,
-            "secondary": secondaryItems,
-            "college":teachersCollageItems
-        };
-
-        setItems(itemsMap[selectedPath] || null);
     };
 
     const handleSubmit = async (e) => {
@@ -173,19 +143,14 @@ const Support = () => {
         formData.append("schema", schema);
         formData.append("table", table);
 
-        const apiUrl = config.API_BASE_URL;
-        const endpoint = `${apiUrl}/${path}/${categoryPath}`;
-
-        console.log("🚀 Endpoint:", endpoint);
-        console.log("📌 Schema:", schema);
-        console.log("📌 Table:", table);
-
         try {
+            const apiUrl = config.API_BASE_URL;
+            const endpoint = `${apiUrl}/${path}/${categoryPath}`;
+
             const response = await axios.post(endpoint, formData);
             setSuccessMessage(response.data.message || "Upload successful");
             resetForm();
         } catch (error) {
-            console.error("Submission error:", error);
             setErrorMessage("An error occurred while submitting the form.");
         } finally {
             setLoading(false);
@@ -215,7 +180,7 @@ const Support = () => {
                     <p className="text-info m-0">CREATE RESOURCES</p>
                 </li>
 
-                {["pre/primary", "primary", "jss","senior/school", "secondary", "college"].map((item, index) => (
+                {["pre/primary", "primary", "jss", "senior/school", "secondary", "college"].map((item, index) => (
                     <li
                         key={index}
                         name={item}
@@ -224,89 +189,82 @@ const Support = () => {
                         style={{ cursor: 'pointer' }}
                         onClick={handleClick}
                     >
-                        {item.charAt(0).toUpperCase() + item.slice(1)}
+                        {item.toUpperCase()}
                     </li>
                 ))}
             </ul>
 
-            <div className="d-flex justify-content-center">
-                {path && <h4>{path}</h4>}
-            </div>
-
-            <div className="row">
-                {loading && <div className="loader"></div>}
-
-                <div className={`${showForm ? "d-flex justify-content-center" : "d-none"}`}>
-                    <select
-                        className="custom-select width-fit-content px-5 rounded bg-primary text-white"
-                        value={categoryPath}
-                        onChange={handleCategoryChange}
-                    >
-                        <option value="">Select Category</option>
-                        {Object.keys(categoryTableMap).map(key => (
-                            <option key={key} value={key}>
-                                {categoryTableMap[key]
-                                    .replace(/_/g, ' ')
-                                    .toLowerCase()
-                                    .replace(/\b\w/g, c => c.toUpperCase())}
-                            </option>
-                        ))}
-                    </select>
+            {path && (
+                <div className="text-center mt-3">
+                    <h4>{path}</h4>
                 </div>
+            )}
 
-                <div className={`d-flex justify-content-center vh-100 position-relative ${showForm ? "" : "d-none"}`}>
-                    <form onSubmit={handleSubmit} className="bg-white">
-                        {["examMS", "set", "grade", "form", "term", "year", "subject"].map(field => (
-                            <div key={field}>
-                                <label className="form-label ms-1">
-                                    <strong>{field.charAt(0).toUpperCase() + field.slice(1)}</strong>
-                                </label>
+            {showForm && (
+                <>
+                    <div className="d-flex justify-content-center my-3">
+                        <select
+                            className="custom-select px-5 rounded bg-primary text-white"
+                            value={categoryPath}
+                            onChange={handleCategoryChange}
+                        >
+                            <option value="">Select Category</option>
+                            {Object.keys(categoryTableMap).map(key => (
+                                <option key={key} value={key}>
+                                    {categoryTableMap[key].replace(/_/g, ' ').toUpperCase()}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
-                                {field === "examMS" ? (
-                                    <select
-                                        className="form-select py-0"
-                                        name={field}
-                                        value={values[field]}
-                                        onChange={handleInput}
-                                    >
-                                        <option value="">Select Option</option>
-                                        <option value="Exam">Exam</option>
-                                        <option value="Marking Scheme">Marking Scheme</option>
-                                    </select>
-                                ) : (
-                                    <input
-                                        type="text"
-                                        className="form-control py-0"
-                                        name={field}
-                                        value={values[field]}
-                                        onChange={handleInput}
-                                        placeholder={`Enter ${field}`}
-                                    />
-                                )}
-                            </div>
-                        ))}
+                    <div className="d-flex justify-content-center">
+                        <form onSubmit={handleSubmit} className="bg-white p-3 rounded">
+                            {["examMS", "set", "grade", "form", "term", "year", "subject"].map(field => (
+                                <div key={field} className="mb-2">
+                                    <label className="form-label">
+                                        <strong>{field.toUpperCase()}</strong>
+                                    </label>
 
-                        <div>
-                            <label className="form-label ms-1"><strong>Files</strong></label>
+                                    {field === "examMS" ? (
+                                        <select
+                                            className="form-select"
+                                            name={field}
+                                            value={values[field]}
+                                            onChange={handleInput}
+                                        >
+                                            <option value="">Select</option>
+                                            <option value="Exam">Exam</option>
+                                            <option value="Marking Scheme">Marking Scheme</option>
+                                        </select>
+                                    ) : (
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name={field}
+                                            value={values[field]}
+                                            onChange={handleInput}
+                                        />
+                                    )}
+                                </div>
+                            ))}
+
                             <input
                                 type="file"
-                                className="form-control py-0"
+                                className="form-control my-2"
                                 multiple
                                 onChange={handleFileChange}
                             />
-                        </div>
 
-                        <div className="d-flex justify-content-center my-3">
-                            <button type="submit" className="btn btn-success" disabled={loading}>
+                            <button className="btn btn-success w-100" disabled={loading}>
                                 {loading ? "Submitting..." : "Submit"}
                             </button>
-                        </div>
 
-                        {errorMessage && <div className="text-center text-danger"><p>{errorMessage}</p></div>}
-                        {successMessage && <div className="text-center text-success"><p>{successMessage}</p></div>}
-                    </form>
-                </div>
-            </div>
+                            {errorMessage && <p className="text-danger text-center mt-2">{errorMessage}</p>}
+                            {successMessage && <p className="text-success text-center mt-2">{successMessage}</p>}
+                        </form>
+                    </div>
+                </>
+            )}
         </div>
     );
 };

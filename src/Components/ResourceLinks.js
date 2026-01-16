@@ -11,24 +11,20 @@ import {
   teachersCollageItems,
 } from "./schoolItems.js";
 import config from "../config.js";
-import "../assets/resourceLinks.css"
+import "../assets/resourceLinks.css";
 
-const ResourceLinks = ({ isAdmin, userId, isLoggedIn, clearToken }) => {
+const ResourceLinks = () => {
   const [selectedItem, setSelectedItem] = useState(null);
-  
-  const [error, setError] = useState(null);
-  
 
-const fetchData = async (path, value) => {
-  try {
-    const apiUrl = config.API_BASE_URL;
-    const URL = `${apiUrl}/${path}/${value}`;
-    await axios.get(URL);
-  } catch (err) {
-    console.error("Could not fetch data");
-  }
-};
-
+  const fetchData = async (path, value) => {
+    try {
+      const apiUrl = config.API_BASE_URL;
+      const URL = `${apiUrl}/${path}/${value}`;
+      await axios.get(URL);
+    } catch (err) {
+      console.error("Could not fetch data");
+    }
+  };
 
   useEffect(() => {
     if (selectedItem) {
@@ -37,7 +33,6 @@ const fetchData = async (path, value) => {
   }, [selectedItem]);
 
   const handleClick = (items, value) => {
-    // Direct navigation paths can be customized here
     switch (value) {
       case "/primary/schemes":
       case "/primary/revision/notes":
@@ -81,12 +76,12 @@ const fetchData = async (path, value) => {
       case "/diploma/notes":
         window.location.href = value;
         return;
-      default:
-        const selectedItem = items.find((item) => item.value === value);
-        if (selectedItem) {
-          setSelectedItem(selectedItem);
+      default: {
+        const selected = items.find((item) => item.value === value);
+        if (selected) {
+          setSelectedItem(selected);
         }
-        break;
+      }
     }
   };
 
@@ -94,87 +89,80 @@ const fetchData = async (path, value) => {
     items.map((item, index) => (
       <li
         key={index}
-        className={`list-group-item border-0 cursor-pointer `}
+        className="list-group-item border-0 cursor-pointer"
         style={{ backgroundColor: "transparent" }}
       >
-      <button
-        type="button"
-        className="btn btn-link text-black fw-bold text-decoration-none px-2 py-2 rounded bg-light hover-bg-dark border-0"
-        onClick={() => handleClick(items, item.value)}
-      >
-        {item.label}
-      </button>
-
-
+        <button
+          type="button"
+          className="btn btn-link text-black fw-bold text-decoration-none px-2 py-2 rounded bg-light hover-bg-dark border-0"
+          onClick={() => handleClick(items, item.value)}
+        >
+          {item.label}
+        </button>
       </li>
     ));
 
   return (
-    <div className="container-fluid p-0 d-flex flex-column align-items-center ">
-       <Helmet>
-      <title>School Learning Resources in Kenya | Elimufiti</title>
-      <meta
-        name="description"
-        content="Explore CBC and CBE learning resources for Pre-Primary, Primary, Junior School, Senior School, and Secondary education in Kenya. Download schemes of work, lesson plans, exams, and revision materials."
-      />
-      <link
-        rel="canonical"
-        href="https://www.elimufiti.co.ke/school/resources"
-      />
-    </Helmet>
-      <div className="w-100 d-flex flex-column align-items-center custom-background-pri">
-        <header className="w-100 schoolTittle">{schoolTittles.prePrimary}</header>
-        <ul className={`  list-group pt-4 pb-4  border-0 `}
-        >
+    <div className="container-fluid p-0 d-flex flex-column align-items-center">
+      <Helmet>
+        <title>School Learning Resources in Kenya | Elimufiti</title>
+        <meta
+          name="description"
+          content="Explore CBC and CBE learning resources for Pre-Primary, Primary, Junior School, Senior School, and Secondary education in Kenya."
+        />
+        <link
+          rel="canonical"
+          href="https://www.elimufiti.co.ke/school/resources"
+        />
+      </Helmet>
+
+      <div className="w-100 custom-background-pri text-center">
+        <header className="schoolTittle">{schoolTittles.prePrimary}</header>
+        <ul className="list-group pt-4 pb-4 border-0">
           {renderListItems(prePrimaryItems)}
         </ul>
       </div>
 
-      <div className="w-100 d-flex flex-column align-items-center custom-background-primary">
-        <header className=" schoolTittle">{schoolTittles.primary}</header>
-        <ul
-          className={`list-group pt-4 pb-4 bg-transparent border-0 `}
-        >
+      <div className="w-100 custom-background-primary text-center">
+        <header className="schoolTittle">{schoolTittles.primary}</header>
+        <ul className="list-group pt-4 pb-4 border-0">
           {renderListItems(primaryItems)}
         </ul>
       </div>
 
-      <div className="w-100 d-flex flex-column align-items-center custom-background-jss">
-        <header className=" schoolTittle">{schoolTittles.jss}</header>
-        <ul className={`list-group pt-4 pb-4 border-0`}    >
+      <div className="w-100 custom-background-jss text-center">
+        <header className="schoolTittle">{schoolTittles.jss}</header>
+        <ul className="list-group pt-4 pb-4 border-0">
           {renderListItems(jssItems)}
         </ul>
       </div>
 
-      <div className="w-100 d-flex flex-column align-items-center custom-background-jss">
-        <header className=" schoolTittle">{schoolTittles.senior}</header>
-        <ul className={`list-group pt-4 pb-4 border-0`}    >
+      <div className="w-100 custom-background-jss text-center">
+        <header className="schoolTittle">{schoolTittles.senior}</header>
+        <ul className="list-group pt-4 pb-4 border-0">
           {renderListItems(seniorSchoolItems)}
         </ul>
       </div>
 
-      <div className=" w-100 d-flex flex-column align-items-center custom-background-sec">
-        <header className=" schoolTittle">{schoolTittles.secondary}</header>
-        <ul
-          className={`list-group pt-4 pb-4 border-0`}
-        >
+      <div className="w-100 custom-background-sec text-center">
+        <header className="schoolTittle">{schoolTittles.secondary}</header>
+        <ul className="list-group pt-4 pb-4 border-0">
           {renderListItems(secondaryItems)}
         </ul>
       </div>
-      <div className="w-100 d-flex flex-column align-items-center custom-background-container">
-  {/* Background with overlay */}
-  <div className="custom-background-teachers-collage">
-    <div className="background-overlay"></div> {/* Overlay */}
-  </div>
 
-  {/* Content not affected by the overlay */}
-  <header className="schoolTittle">{schoolTittles.teachersCollage}</header>
-  <ul className="list-group pt-4 pb-4 border-0">
-    {renderListItems(teachersCollageItems)}
-  </ul>
-</div>
+      <div className="w-100 custom-background-container text-center">
+        <div className="custom-background-teachers-collage">
+          <div className="background-overlay"></div>
+        </div>
 
-
+        <header className="schoolTittle">
+          {schoolTittles.teachersCollage}
+        </header>
+        <ul className="list-group pt-4 pb-4 border-0">
+          {renderListItems(teachersCollageItems)}
+        </ul>
+      </div>
     </div>
   );
 };

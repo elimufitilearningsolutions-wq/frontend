@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {
-    prePrimaryItems,
-    primaryItems,
-    jssItems,
-    seniorSchoolItems,
-    secondaryItems,
-    teachersCollageItems
-} from './schoolItems.js';
+
 import config from '../config.js';
 
 /* =======================

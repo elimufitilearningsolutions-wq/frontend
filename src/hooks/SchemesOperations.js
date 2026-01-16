@@ -11,7 +11,8 @@ export const SchemesDownload = ({ isAdmin, isLoggedIn, clearToken, heading, isSu
     const selectedItem = location.state?.selectedItem || {};
 
     const { handleDownloadExam, showModal, errorMessage, closeModal } = useDownloadHandler();
-    const { handleDeleteExam, showDeleteModal, setShowDeleteModal, errorMessage: deleteErrorMessage, closeDeleteModal } = useDeleteHandler();
+ const { handleDeleteExam, showDeleteModal, setShowDeleteModal, closeDeleteModal } = useDeleteHandler();
+
 
     const [itemToDelete, setItemToDelete] = useState(null);
 
@@ -34,10 +35,8 @@ export const SchemesDownload = ({ isAdmin, isLoggedIn, clearToken, heading, isSu
         return acc;
     }, {}) : {};
 
-    // Log the value of isSubscribed
-    console.log('isSubscribed:', isSubscribed);
-    console.log('Admin or Not:', isAdmin);
-
+    
+   
     return (
         <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
             <div style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1030 }}>

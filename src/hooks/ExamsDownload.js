@@ -10,7 +10,8 @@ const ExamsDownload = ({ isAdmin, isLoggedIn, clearToken, heading, isSubscribed 
     const selectedItem = location.state?.selectedItem || {};
 
     const { handleDownloadExam, showModal, errorMessage, closeModal } = useDownloadHandler();
-    const { handleDeleteExam, showDeleteModal, setShowDeleteModal, errorMessage: deleteErrorMessage, closeDeleteModal } = useDeleteHandler();
+    const { handleDeleteExam, showDeleteModal, setShowDeleteModal, closeDeleteModal } = useDeleteHandler();
+
 
     const [itemToDelete, setItemToDelete] = useState(null);
 

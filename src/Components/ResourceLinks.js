@@ -75,7 +75,10 @@ const ResourceLinks = ({ isAdmin, userId, isLoggedIn, clearToken }) => {
       case "/pre/primary/curriculum/designs":
       case "/pre/primary/holiday/assignments":
       case "/primary/holiday/assignments":
-      case "/collage/university/notes":
+      case "/dpte/notes":
+      case "/cpa/notes":
+      case "/ecd/notes":
+      case "/diploma/notes":
         window.location.href = value;
         return;
       default:

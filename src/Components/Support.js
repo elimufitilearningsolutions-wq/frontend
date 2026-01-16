@@ -5,7 +5,8 @@ import {
     primaryItems,
     jssItems,
     seniorSchoolItems,
-    secondaryItems
+    secondaryItems, 
+    teachersCollageItems
 } from './schoolItems.js';
 import config from '../config.js';
 
@@ -37,7 +38,11 @@ const categoryTableMap = {
     "create/grade9/exam": "grade9_exams",
     "create/grade10/exams": "grade10_exams",
     "create/assessment/tools": "assessment_tools",
-    "create/holiday/assignments": "holiday_assignments"
+    "create/holiday/assignments": "holiday_assignments",
+    "/create/cpanotes": "cpanotes",
+    "/create/dptenotes": "dptenotes",
+    "/create/ecdnotes": "ecdnotes",
+    "/create/diplomanotes": "diplomanotes"
 };
 
 /* =======================
@@ -136,7 +141,8 @@ const Support = () => {
             "primary": primaryItems,
             "jss": jssItems,
             "senior/school":seniorSchoolItems,
-            "secondary": secondaryItems
+            "secondary": secondaryItems,
+            "college":teachersCollageItems
         };
 
         setItems(itemsMap[selectedPath] || null);
@@ -209,7 +215,7 @@ const Support = () => {
                     <p className="text-info m-0">CREATE RESOURCES</p>
                 </li>
 
-                {["pre/primary", "primary", "jss","senior/school", "secondary"].map((item, index) => (
+                {["pre/primary", "primary", "jss","senior/school", "secondary", "college"].map((item, index) => (
                     <li
                         key={index}
                         name={item}

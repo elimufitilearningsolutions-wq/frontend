@@ -64,11 +64,10 @@ export const secondaryItems = [
       
 ]
 export const teachersCollageItems = [
-       { label: "Diploma in Primary Teacher Education (DPTE) Notes  ", value: "/collage/university/notes" ,path: "collage/university"},
-       { label: "CPA Notes  ",  value: "#",path: "#"},
-       { label: "SCHOLARSHIPS   ", value: "#",path: "#"},
-       { label: "ECDE NOTES   ", value: "#" ,path: "#"},//the value is the routing path
-       { label: "DIPLOMA NOTES  ", value: "#",path: "#"}
+       { label: "Diploma in Primary Teacher Education (DPTE) Notes  ", value: "/dpte/notes" ,path: "collage"},
+       { label: "CPA Notes  ",  value: "/cpa/notes",path: "collage"},       
+       { label: "ECD NOTES   ", value: "/ecd/notes" ,path: "collage"},//the value is the routing path
+       { label: "DIPLOMA NOTES  ", value: "/diploma/notes",path: "collage"}
        
       
 ]

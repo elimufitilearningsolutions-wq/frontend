@@ -77,7 +77,7 @@ import Header2 from './Components/Header2';
 import Footer2 from './Components/Footer2';
 import ResourceLinks from './Components/ResourceLinks';
 import Careers from './Components/Careers';
-import DPTENotes from './Components/DPTENOTES';
+import DPTENotes from './Components/DPTENotes';
 import Grade10Examinations from './Components/Grade10Examinations';
 import Grade10ExaminationsDownload from './Components/Grade10ExaminationsDownloads';
 import SeniorSchoolSchemes from './Components/SeniorSchoolschemes';
@@ -88,6 +88,13 @@ import SeniorSchoolNotes from './Components/SeniorSchoolNotes';
 import SeniorSchoolNotesDownloads from './Components/SeniorSchoolNotesDownloads';
 import JssLessonPlans from './Components/JssLessonPlan';
 import JssLessonPlanDownloads from './Components/JssLessonPlanDownloads';
+import DPTENotesDownloads from './Components/DPTENotesDownloads';
+import CPANotes from './Components/CPANotes';
+import CPANotessDownload from './Components/CPANotesDownloads';
+import ECDNotes from './Components/ECDNotes';
+import ECDNotessDownload from './Components/ECDNotesDownloads';
+import DiplomaNotes from './Components/DiplomaNotes';
+import DiplomaNotessDownloads from './Components/DiplomaNotesDownloads';
 
 
 const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIsLoggedIn, setUserId, setShowModal }) => (
@@ -432,7 +439,112 @@ const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIs
   }
 />
 
+ {/*COLLEGE/UNIVERSITY/ JSS ROUTES*/}  
 
+
+<Route
+  path="/dpte/notes"
+  element={
+    <DPTENotes
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+
+<Route
+  path="/dpte/notes/downloads"
+  element={
+    <DPTENotesDownloads
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+
+<Route
+  path="/cpa/notes"
+  element={
+    <CPANotes
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+
+<Route
+  path="/cpa/notes/downloads"
+  element={
+    <CPANotessDownload
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+
+<Route
+  path="/ecd/notes"
+  element={
+    <ECDNotes
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+
+<Route
+  path="/ecd/notes/downloads"
+  element={
+    <ECDNotessDownload
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+
+<Route
+  path="/diploma/notes"
+  element={
+    <DiplomaNotes
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+
+<Route
+  path="/diploma/notes/downloads"
+  element={
+    <DiplomaNotessDownloads
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
 
 
         {/*SECONDARY*/}
@@ -515,11 +627,8 @@ const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIs
         element={<PlayGroupDownload isAdmin={isAdmin} userId={userId} isLoggedIn={isLoggedIn} clearToken={clearToken} isSubscribed={isSubscribed}/>} 
         />       
 
-        {/*COLLEGE/UNIVERSITY/ JSS ROUTES*/}  
-        <Route
-        path='collage/university/notes'
-        element ={<DPTENotes isAdmin={isAdmin} userId={userId} isLoggedIn={isLoggedIn} clearToken={clearToken} isSubscribed={isSubscribed}/>}
-        />
+       
+      
         <Route path='*' element={<div>404 Not Found</div>} /> {/* Optional: Add a 404 page */}
         <Route
         path='/careers'

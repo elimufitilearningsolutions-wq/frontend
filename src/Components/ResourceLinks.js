@@ -15,20 +15,20 @@ import "../assets/resourceLinks.css"
 
 const ResourceLinks = ({ isAdmin, userId, isLoggedIn, clearToken }) => {
   const [selectedItem, setSelectedItem] = useState(null);
-  const [data, setData] = useState([]);
+  
   const [error, setError] = useState(null);
   
 
-  const fetchData = async (path, value) => {
-    try {
-      const apiUrl = config.API_BASE_URL;
-      const URL = `${apiUrl}/${path}/${value}`;     
-      const res = await axios.get(URL);
-      setData(res.data);
-    } catch (err) {
-      setError("Could not fetch data");
-    }
-  };
+const fetchData = async (path, value) => {
+  try {
+    const apiUrl = config.API_BASE_URL;
+    const URL = `${apiUrl}/${path}/${value}`;
+    await axios.get(URL);
+  } catch (err) {
+    console.error("Could not fetch data");
+  }
+};
+
 
   useEffect(() => {
     if (selectedItem) {
@@ -97,13 +97,14 @@ const ResourceLinks = ({ isAdmin, userId, isLoggedIn, clearToken }) => {
         className={`list-group-item border-0 cursor-pointer `}
         style={{ backgroundColor: "transparent" }}
       >
-        <a
-  href="#"
-  className="text-black fw-bold text-decoration-none px-2 py-2 d-inline-block rounded bg-light hover-bg-dark"
-  onClick={() => handleClick(items, item.value)}
->
-  {item.label}
-</a>
+      <button
+        type="button"
+        className="btn btn-link text-black fw-bold text-decoration-none px-2 py-2 rounded bg-light hover-bg-dark border-0"
+        onClick={() => handleClick(items, item.value)}
+      >
+        {item.label}
+      </button>
+
 
       </li>
     ));

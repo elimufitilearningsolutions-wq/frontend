@@ -1,88 +1,98 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useLocation } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
-import {jwtDecode} from 'jwt-decode'; // Correct import
+import { jwtDecode } from 'jwt-decode';
+import ReactPixel from "react-facebook-pixel";
+
 import { clearToken } from './utils';
 import config from './config';
 
+const AppContent = ({
+  isSubscribed,
+  isLoggedIn,
+  userId,
+  isAdmin,
+  clearTokenFn
+}) => {
+  const location = useLocation();
+
+  // ✅ Track page views on route change
+  useEffect(() => {
+    ReactPixel.pageView();
+  }, [location]);
+
+  return (
+    <AppRoutes
+      isSubscribed={isSubscribed}
+      isLoggedIn={isLoggedIn}
+      userId={userId}
+      isAdmin={isAdmin}
+      clearToken={clearTokenFn}
+    />
+  );
+};
+
 const App = () => {
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [isSubscribed, setIsSubscribed] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userId, setUserId] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null);
 
-    // Check authentication and decode JWT token
-    useEffect(() => {
-        const token = localStorage.getItem('accessToken');
-       // console.log("app.js token",token)
-        if (token) {
-            try {
-                const decodedToken = jwtDecode(token);
-                const [userId, isAdmin] = decodedToken.payload; // Destructure userId and isAdmin
-                //console.log("payload", decodedToken.payload);
-    
-                setUserId(userId);
-                setIsLoggedIn(true); // User is logged in
-    
-                // Check if isAdmin is truthy (e.g., "1", true, or any other truthy value)
-                if (isAdmin === "1" || isAdmin === true) {
-                    setIsAdmin(true); // Set admin status
-                } else {
-                    setIsAdmin(false); // Set non-admin status
-                }
-            } catch (error) {
-                console.error('Error decoding token:', error);
-                clearToken(setIsLoggedIn, setUserId, setIsSubscribed);
-            }
-        } else {
-            // No token, user is not logged in
-            setIsLoggedIn(false);
+  // 🔐 Decode JWT
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        const [userId, isAdmin] = decodedToken.payload;
+
+        setUserId(userId);
+        setIsLoggedIn(true);
+        setIsAdmin(isAdmin === "1" || isAdmin === true);
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        clearToken(setIsLoggedIn, setUserId, setIsSubscribed);
+      }
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
+  // 🔍 Fetch admin status
+  useEffect(() => {
+    const fetchAdministrationStatus = async () => {
+      if (!userId) return;
+
+      try {
+        const url = `${config.API_BASE_URL}/api/subscriptions/admin/status/${userId}`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (response.ok) {
+          setIsAdmin(data.isAdmin > 0);
         }
-    }, []);
-    
+      } catch (error) {
+        console.error('Error fetching admin:', error);
+      }
+    };
 
-    // Fetch subscription status when userId is set (if not included in the token)  
+    fetchAdministrationStatus();
+  }, [userId]);
 
-    useEffect(() => {
-        const fetchAdministrationStatus = async () => {
-            if (userId) { // Only fetch if userId is available
-                try {
-                    const apiUrl = config.API_BASE_URL;
-                    const url = `${apiUrl}/api/subscriptions/admin/status/${userId}`;
-                   // console.log('Fetching admins status from URL:', url);
-
-                    const response = await fetch(url);
-                    const data = await response.json();
-
-                    if (response.ok) {
-                        const adminStatus = data.isAdmin > 0; // Assuming Amount indicates subscription
-                        setIsAdmin(adminStatus);
-                        
-                    } else {
-                        console.error('Admin fetch error:', data.message);
-                    }
-                } catch (error) {
-                    console.error('Error fetching admin:', error);
-                }
-            }
-        };
-
-        fetchAdministrationStatus();
-    }, [userId]);  
-    
-
-
-    return (
-        <BrowserRouter>
-            <AppRoutes
-                isSubscribed={isSubscribed}
-                isLoggedIn={isLoggedIn}
-                userId={userId}
-                isAdmin={isAdmin}
-                clearToken={() => clearToken(setIsLoggedIn, setUserId, setIsSubscribed)}
-            />
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <AppContent
+        isSubscribed={isSubscribed}
+        isLoggedIn={isLoggedIn}
+        userId={userId}
+        isAdmin={isAdmin}
+        clearTokenFn={() =>
+          clearToken(setIsLoggedIn, setUserId, setIsSubscribed)
+        }
+      />
+    </BrowserRouter>
+  );
 };
 
 export default App;

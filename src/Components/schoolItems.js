@@ -16,6 +16,7 @@
         { label: "PP1 EXAMS", value: "/pp1/exams" , path: "pre/primary"},
         { label: "PP2 EXAMS", value: "/pp2/exams" , path: "pre/primary"},
         { label: "PRE-PRIMARY HOLIDAY REVISIONS", value: "/pre/primary/holiday/assignments" , path: "pre/primary"},       
+        { label: "PLAYGROUP COLOURING PAGES", value: "/play/group/colouring" , path: "pre/primary"},       
         
     ]
 

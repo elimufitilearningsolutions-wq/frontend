@@ -32,58 +32,74 @@ const ResourceLinks = () => {
     }
   }, [selectedItem]);
 
-  const handleClick = (items, value) => {
-    switch (value) {
-      case "/primary/schemes":
-      case "/primary/revision/notes":
-      case "/primary/curriculum/designs":
-      case "/primary/assessment/tools":
-      case "/grade1/examinations":
-      case "/grade2/examinations":
-      case "/grade3/examinations":
-      case "/grade4/examinations":
-      case "/grade5/examinations":
-      case "/grade6/examinations":
-      case "/grade7/examinations":
-      case "/grade8/examinations":
-      case "/play/group/exams":
-      case "/pp1/exams":
-      case "/pp2/exams":
-      case "/secondary/schemes":
-      case "/secondary/fullset/examinations":
-      case "/secondary/notes":
-      case "/kcse/trial/examinations":
-      case "/kcse/past/papers":
-      case "/secondary/holiday/revision":
-      case "/jss/assessment/tools":
-      case "/jss/curriculum/designs":
-      case "/jss/fullset/examinations":
-      case "/jss/holiday/assignments":
-      case "/jss/notes":
-      case "/jss/schemes":
-      case "/jss/lesson/plans":
-      case "/senior/school/schemes":
-      case "/grade10/examinations":
-      case "/senior/school/notes":
-      case "/senior/school/curriculum/designs":
-      case "/pre/primary/schemes":
-      case "/pre/primary/curriculum/designs":
-      case "/pre/primary/holiday/assignments":
-      case "/primary/holiday/assignments":
-      case "/dpte/notes":
-      case "/cpa/notes":
-      case "/ecd/notes":
-      case "/diploma/notes":
-        window.location.href = value;
-        return;
-      default: {
-        const selected = items.find((item) => item.value === value);
-        if (selected) {
-          setSelectedItem(selected);
-        }
-      }
-    }
+  
+const handleClick = (items, value) => {
+  const selected = items?.find((item) => item.value === value) || null;
+
+  // 🔹 LOG WHAT WAS CLICKED
+  const logData = {
+    clickedValue: value,
+    selectedItem: selected,
+    timestamp: new Date().toISOString(),
   };
+
+  console.log("MENU CLICK:", logData);
+
+  // (Optional) send to backend / analytics
+  // navigator.sendBeacon("/api/log-click", JSON.stringify(logData));
+
+  switch (value) {
+    case "/primary/schemes":
+    case "/primary/revision/notes":
+    case "/primary/curriculum/designs":
+    case "/primary/assessment/tools":
+    case "/grade1/examinations":
+    case "/grade2/examinations":
+    case "/grade3/examinations":
+    case "/grade4/examinations":
+    case "/grade5/examinations":
+    case "/grade6/examinations":
+    case "/grade7/examinations":
+    case "/grade8/examinations":
+    case "/play/group/exams":
+    case "/pp1/exams":
+    case "/pp2/exams":
+    case "/secondary/schemes":
+    case "/secondary/fullset/examinations":
+    case "/secondary/notes":
+    case "/kcse/trial/examinations":
+    case "/kcse/past/papers":
+    case "/secondary/holiday/revision":
+    case "/jss/assessment/tools":
+    case "/jss/curriculum/designs":
+    case "/jss/fullset/examinations":
+    case "/jss/holiday/assignments":
+    case "/jss/notes":
+    case "/jss/schemes":
+    case "/jss/lesson/plans":
+    case "/senior/school/schemes":
+    case "/grade10/examinations":
+    case "/senior/school/notes":
+    case "/senior/school/curriculum/designs":
+    case "/pre/primary/schemes":
+    case "/pre/primary/curriculum/designs":
+    case "/pre/primary/holiday/assignments":
+    case "/primary/holiday/assignments":
+    case "/dpte/notes":
+    case "/cpa/notes":
+    case "/ecd/notes":
+    case "/diploma/notes":
+    case "/play/group/colouring":
+      window.location.href = value;
+      return;
+
+    default:
+      if (selected) {
+        setSelectedItem(selected);
+      }
+  }
+};
+
 
   const renderListItems = (items) =>
     items.map((item, index) => (

@@ -95,6 +95,8 @@ import ECDNotes from './Components/ECDNotes';
 import ECDNotessDownload from './Components/ECDNotesDownloads';
 import DiplomaNotes from './Components/DiplomaNotes';
 import DiplomaNotessDownloads from './Components/DiplomaNotesDownloads';
+import PlayGroupColouring from './Components/PlayGroupColouringPages';
+import PlayGroupColouringDownloads from './Components/PlayGroupColouringPagesDownloads';
 
 
 const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIsLoggedIn, setUserId, setShowModal }) => (
@@ -130,10 +132,33 @@ const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIs
         path="/play/group/exams" 
         element={<PlayGroup isAdmin={isAdmin} userId={userId} isLoggedIn={isLoggedIn} clearToken={clearToken} isSubscribed={isSubscribed} />}
         />
+
         <Route 
         path="/pre/primary/schemes" 
-        element={<PrePrimarySchemes isAdmin={isAdmin} userId={userId} isLoggedIn={isLoggedIn} clearToken={clearToken} isSubscribed={isSubscribed} />}
+        element={<PrePrimarySchemes isAdmin={isAdmin}
+         userId={userId} 
+         isLoggedIn={isLoggedIn} 
+         clearToken={clearToken} 
+         isSubscribed={isSubscribed} />}
         />
+
+        <Route 
+        path="/play/group/colouring" 
+        element={<PlayGroupColouring isAdmin={isAdmin}
+         userId={userId} 
+         isLoggedIn={isLoggedIn} 
+         clearToken={clearToken} 
+         isSubscribed={isSubscribed} />}
+        />
+        <Route 
+        path="/play/group/colouring/downloads" 
+        element={<PlayGroupColouringDownloads isAdmin={isAdmin}
+         userId={userId} 
+         isLoggedIn={isLoggedIn} 
+         clearToken={clearToken} 
+         isSubscribed={isSubscribed} />}
+        />
+
         <Route 
         path="/pre/primary/schemes/download" 
         element={<PrePrimarySchemesDownload isAdmin={isAdmin} userId={userId} isLoggedIn={isLoggedIn} clearToken={clearToken}isSubscribed={isSubscribed} />}

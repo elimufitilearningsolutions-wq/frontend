@@ -18,6 +18,7 @@ const categoryTableMap = {
     "create/kcse/trial/examinations": "kcse_trial_examinations",
     "create/revision/notes": "revision_notes",
     "create/play/group/exams": "playgroup_exams",
+    "/create/coluring/pages": "colouring_pages",
     "create/pp1/exams": "pp1_exams",
     "create/pp2/exams": "pp2_exams",
     "create/grade1/exam": "grade1_exams",

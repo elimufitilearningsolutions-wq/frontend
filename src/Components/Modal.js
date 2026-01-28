@@ -15,7 +15,7 @@ const Modal = ({ show, handleClose, isSubscribed, isLoggedIn, children }) => {
                             {isLoggedIn 
                                 ? isSubscribed 
                                     ? "Action Required" 
-                                    : "Subscription Required" 
+                                    : "🔓 Unlock downloads (KSh 10 trial)" 
                                 : "Login Required"}
                         </h5>
                         <button type="button" className="btn-close" onClick={handleClose} aria-label="Close"></button>
@@ -32,7 +32,7 @@ const Modal = ({ show, handleClose, isSubscribed, isLoggedIn, children }) => {
                             {isLoggedIn 
                                 ? isSubscribed 
                                     ? null 
-                                    : <p>Subscribe to access this content</p> // Display link when not subscribed
+                                    : <p>Unlock downloads</p> 
                                 : <p>Login to continue</p>}
                         </div>
                     </div>

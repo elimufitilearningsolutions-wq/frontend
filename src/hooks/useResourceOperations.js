@@ -32,7 +32,14 @@ export const useDownloadHandler = () => {
     
             const { data: subscriptionData } = subscriptionResponse;
             const amount = subscriptionData.Amount || 0;
-            if (amount <= 0) throw new Error('Subscribe to download');
+            if (amount <= 0) {
+                throw new Error(
+                    '🔓 Unlock downloads with a KSh 10 one-time trial.\n\n' +
+                    '✔ Unlimited access\n' 
+                    
+                );
+                }
+
     
             // Proceed with file download
             const modifiedCategory = category.slice(0, -1);

@@ -54,12 +54,12 @@ const Subscribe = ({ userId }) => {
     };
 
     return (
-        <div className="container mt-5">
+        <div className="container mt-2">
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <div className="card">
                         <div className="card-header bg-primary text-white text-center">
-                            <h5>Subscribe to Access All Resources</h5>
+                            <h5>Follow the simple steps below</h5>
                         </div>
                         <div className="card-body">
                             {message.text && (
@@ -68,7 +68,7 @@ const Subscribe = ({ userId }) => {
                                 </div>
                             )}
                             <form onSubmit={handleSubmit}>
-                                <h2>How to subscribe</h2>
+                                
                                 <ol class="subscription-steps">
                                 <li>Enter your preferred amount</li>
                                 <li>Enter the phone number to pay with</li>

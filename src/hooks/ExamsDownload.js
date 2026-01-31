@@ -5,6 +5,8 @@ import DeleteModal from '../Components/DeleteModal';
 import { useDownloadHandler, useDeleteHandler } from './useResourceOperations';
 
 const ExamsDownload = ({ isAdmin, isLoggedIn, clearToken, heading, isSubscribed }) => {
+    console.log("isAdmin in ExamsDownload:", isAdmin);
+
     const location = useLocation();
     const data = location.state?.data || [];
     const selectedItem = location.state?.selectedItem || {};

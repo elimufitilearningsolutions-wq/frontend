@@ -6,6 +6,7 @@ import DeleteModal from '../Components/DeleteModal';
 import { useDownloadHandler, useDeleteHandler } from './useResourceOperations';
 
 export const SchemesDownload = ({ isAdmin, isLoggedIn, clearToken, heading, isSubscribed }) => {
+     console.log("isAdmin in ExamsDownload:", isAdmin);
     const location = useLocation();
     const data = location.state?.data || [];
     const selectedItem = location.state?.selectedItem || {};
@@ -22,8 +23,14 @@ export const SchemesDownload = ({ isAdmin, isLoggedIn, clearToken, heading, isSu
     };
 
     const confirmDeleteExam = () => {
-        handleDeleteExam(selectedItem.path, itemToDelete.id, selectedItem.value);
-    };
+    console.log("Deleting exam with parameters:");
+    console.log("Path:", selectedItem.path);
+    console.log("Item ID:", itemToDelete?.id);
+    console.log("Value:", selectedItem.value);
+
+    handleDeleteExam(selectedItem.path, itemToDelete.id, selectedItem.value);
+};
+
 
     // Determine the key to use for grouping
     const groupingKey = data.length > 0 && data[0].form ? 'form' : 'grade';
@@ -46,64 +53,102 @@ export const SchemesDownload = ({ isAdmin, isLoggedIn, clearToken, heading, isSu
                 
                 <div className="container-fluid" style={{ paddingRight: '10px' }}>
                     <div className="row">
-                        <div className="col-12 col-lg-10  pl-0 pl-lg-5">
-                            <h1 className="text-center my-4 py-4">{heading}</h1>
-                            <h2 className="text-center my-4" style={{ textDecoration: 'underline' }}>{selectedItem.year}</h2>
-                            <div className="list-group mt-4">
-                                {Object.keys(groupedData).length > 0 ? (
-                                    Object.keys(groupedData).map((key) => (
-                                        <div key={key}>
-                                            <h3 className="my-4">{groupingKey.toUpperCase()} {key}</h3>
-                                            {groupedData[key].map((item) => (
-                                                <div key={item.id} style={{ margin: '0px 0' }}>
-                                                    <div
-                                                        
-                                                        className="my-2 custom-font t"
-                                                        onClick={(e) => {
-                                                            e.preventDefault();
-                                                            // Pass the actual fileName parameter to handleDownloadExam
-                                                            handleDownloadExam(
-                                                                selectedItem.path, 
-                                                                item.id, 
-                                                                selectedItem.value, 
-                                                                item.fileName
-                                                            );
-                                                        }}
-                                                        style={{ fontFamily: 'Copperplate, Copperplate Gothic Light, serif' }}
-                                                    >
-                                                         {item.fileName && (
-                                                        <p 
-                                                            className="cursor-pointer text-primary custom-font" 
-                                                            style={{ 
-                                                                cursor: 'pointer', 
-                                                                textDecoration: "underline", 
-                                                                margin: 0, // Remove margin to eliminate the gap
-                                                                fontFamily: 'Copperplate, Copperplate Gothic Light, serif'
-                                                            }}
-                                                        >
-                                                            {item.fileName}
-                                                        </p>
-                                                    )}                                         
-                                                       
-                                                       
-                                                    </div>
+                        <div
+  className="list-group mt-4"
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',   // 👈 centers EVERYTHING
+  }}
+>
+  {Object.keys(groupedData).length > 0 ? (
+    Object.keys(groupedData).map((key) => (
+      <div
+        key={key}
+        style={{
+          width: '100%',
+          maxWidth: '600px',   // optional: keeps content readable
+        }}
+      >
+        <h3 className="my-4 text-center">
+          <span
+            style={{
+              display: 'inline-block',
+              maxWidth: '300px',
+              width: '100%',
+              margin: '0 auto',
+              fontWeight: '700',
+              fontSize: '1.6rem',
+              color: '#222',
+              borderBottom: '2px solid #ddd',
+              paddingBottom: '6px',
+              letterSpacing: '1px',
+            }}
+          >
+            {groupingKey.toUpperCase()} {key}
+          </span>
+        </h3>
 
-                                                    {isAdmin && (
-                                                        <i
-                                                            onClick={() => handleDeleteClick(item)}
-                                                            className="bi bi-trash"
-                                                            style={{ marginLeft: '10px' }}  // Adjust the margin-left value as needed
-                                                        ></i>
-                                                    )}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ))
-                                ) : (
-                                    <pre>No data received</pre>
-                                )}
-                            </div>
-                        </div>
+        {groupedData[key].map((item) => (
+          <div
+            key={item.id}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center', // 👈 centers each row
+              width: '100%',
+              margin: 0,
+              padding: 0,
+            }}
+          >
+            <p
+              onClick={(e) => {
+                e.preventDefault();
+                handleDownloadExam(
+                  selectedItem.path,
+                  item.id,
+                  selectedItem.value,
+                  item.fileName
+                );
+              }}
+              className="text-primary custom-font"
+              style={{
+                cursor: 'pointer',
+                margin: 0,
+                padding: '2px',
+                fontFamily: 'Cinzel, serif',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {item.fileName}
+            </p>
+
+            {isAdmin && (
+              <button
+                onClick={() => handleDeleteClick(item)}
+                style={{
+                  margin: 0,
+                  padding: '0 0 0 8px',
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: 'red',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <i className="bi bi-trash"></i>
+              </button>
+            )}
+          </div>
+        ))}
+      </div>
+    ))
+  ) : (
+    <pre>No data received</pre>
+  )}
+</div>
+
                     </div>
                 </div>
             </div>

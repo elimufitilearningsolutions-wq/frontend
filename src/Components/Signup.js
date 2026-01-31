@@ -59,13 +59,14 @@ const Signup = ({ isAdmin }) => {
       const response = await axios.post(`${apiUrl}/api/signup`, values);
 
       if (response.status === 201) {
-        const { token, userId } = response.data;
+        const { token, userId, isAdmin } = response.data;
 
         // ✅ SAME AS LOGIN
         localStorage.setItem("accessToken", token);
         localStorage.setItem("userId", userId);
+        localStorage.setItem("isAdmin", isAdmin === '1');
 
-        console.log("Signup + login success:", token, userId);
+        console.log("Signup + login success:", token, userId, isAdmin);
 
         window.location.href = "/";
       }

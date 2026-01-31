@@ -1,10 +1,10 @@
 // src/components/PP1ExamsDownload.js
 import React from 'react';
-import ExamsDownload from '../hooks/ExamsDownload';
+import {SchemesDownload} from '../hooks/SchemesOperations';
 
 const PP2ExamsDownload = ({ isAdmin, isLoggedIn, clearToken , isSubscribed}) => {
     return (
-        <ExamsDownload
+        <SchemesDownload
             isAdmin={isAdmin}
             isSubscribed={isSubscribed}
             isLoggedIn={isLoggedIn}

@@ -5,8 +5,24 @@ import Modal from "../Components/Modal";
 import DeleteModal from '../Components/DeleteModal';
 import { useDownloadHandler, useDeleteHandler } from './useResourceOperations';
 
+
+
 export const SchemesDownload = ({ isAdmin, isLoggedIn, clearToken, heading, isSubscribed }) => {
-     console.log("isAdmin in ExamsDownload:", isAdmin);
+    
+const [selectedIds, setSelectedIds] = useState([]);
+
+
+const toggleSelect = (id) => {
+  setSelectedIds((prev) =>
+    prev.includes(id)
+      ? prev.filter((x) => x !== id)
+      : [...prev, id]
+  );
+};
+
+
+
+    // console.log("isAdmin in ExamsDownload:", isAdmin); // uncomment incase of errors in future
     const location = useLocation();
     const data = location.state?.data || [];
     const selectedItem = location.state?.selectedItem || {};
@@ -61,6 +77,33 @@ export const SchemesDownload = ({ isAdmin, isLoggedIn, clearToken, heading, isSu
     alignItems: 'center',   // 👈 centers EVERYTHING
   }}
 >
+{/*Delete bulk*/}
+ {isAdmin && selectedIds.length > 0 && (
+  <div
+    style={{
+      fontSize: "12px",
+      color: "gray",
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      marginBottom: "10px",
+      justifyContent: "center",
+    }}
+  >
+    <span>
+      Selected IDs: {JSON.stringify(selectedIds)}
+    </span>
+
+    <button
+      className="btn btn-sm btn-danger"
+      type="button"
+    >
+      Delete Selected ({selectedIds.length})
+    </button>
+  </div>
+)}
+
+
   {Object.keys(groupedData).length > 0 ? (
     Object.keys(groupedData).map((key) => (
       <div
@@ -90,58 +133,72 @@ export const SchemesDownload = ({ isAdmin, isLoggedIn, clearToken, heading, isSu
         </h3>
 
         {groupedData[key].map((item) => (
-          <div
-            key={item.id}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center', // 👈 centers each row
-              width: '100%',
-              margin: 0,
-              padding: 0,
-            }}
-          >
-            <p
-              onClick={(e) => {
-                e.preventDefault();
-                handleDownloadExam(
-                  selectedItem.path,
-                  item.id,
-                  selectedItem.value,
-                  item.fileName
-                );
-              }}
-              className="text-primary custom-font"
-              style={{
-                cursor: 'pointer',
-                margin: 0,
-                padding: '2px',
-                fontFamily: 'Cinzel, serif',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {item.fileName}
-            </p>
+  <div
+    key={item.id}
+    style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      width: "100%",
+      margin: 0,
+      padding: 0,
+      gap: "8px", // 👈 spacing between checkbox and text
+    }}
+  >
+  {isAdmin && (
+  <input
+    type="checkbox"
+    className="form-check-input"
+    checked={selectedIds.includes(item.id)}
+    onChange={() => toggleSelect(item.id)}
+    onClick={(e) => e.stopPropagation()} // still prevents download
+    style={{ margin: 0 }}
+  />
+)}
 
-            {isAdmin && (
-              <button
-                onClick={() => handleDeleteClick(item)}
-                style={{
-                  margin: 0,
-                  padding: '0 0 0 8px',
-                  background: 'transparent',
-                  border: 'none',
-                  cursor: 'pointer',
-                  color: 'red',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                <i className="bi bi-trash"></i>
-              </button>
-            )}
-          </div>
-        ))}
+
+    <p
+      onClick={(e) => {
+        e.preventDefault();
+        handleDownloadExam(
+          selectedItem.path,
+          item.id,
+          selectedItem.value,
+          item.fileName
+        );
+      }}
+      className="text-primary custom-font"
+      style={{
+        cursor: "pointer",
+        margin: 0,
+        padding: "2px",
+        fontFamily: "Cinzel, serif",
+        whiteSpace: "nowrap",
+      }}
+    >
+      {item.fileName}
+    </p>
+
+    {isAdmin && (
+      <button
+        onClick={() => handleDeleteClick(item)}
+        style={{
+          margin: 0,
+          padding: "0 0 0 8px",
+          background: "transparent",
+          border: "none",
+          cursor: "pointer",
+          color: "red",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <i className="bi bi-trash"></i>
+      </button>
+    )}
+  </div>
+))}
+
       </div>
     ))
   ) : (

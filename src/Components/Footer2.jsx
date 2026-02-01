@@ -36,7 +36,7 @@ const Footer2 = () => {
               <li><a className="custom-footer-text" href="/">Sign Up for Employer Account</a></li>
               <li><a className="custom-footer-text" href="/">Search Candidates by Skillset</a></li>
               <li><a className="custom-footer-text" href="/">Create Company Profile</a></li>
-              <li><a className="custom-footer-text" href="/">Browse Candidate Database</a></li>
+              <li><a className="custom-footer-text" href="/admin/applicants">Browse Candidate Database</a></li>
               <li><a className="custom-footer-text" href="/">Employer Branding Resources</a></li>
             </ul>
           </div>

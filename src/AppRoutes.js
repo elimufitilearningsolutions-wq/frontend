@@ -98,6 +98,7 @@ import DiplomaNotessDownloads from './Components/DiplomaNotesDownloads';
 import PlayGroupColouring from './Components/PlayGroupColouringPages';
 import PlayGroupColouringDownloads from './Components/PlayGroupColouringPagesDownloads';
 import Applicants from './Components/Apllicants';
+import Users from './Components/Users';
 
 
 const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIsLoggedIn, setUserId, setShowModal }) => (
@@ -124,6 +125,13 @@ const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIs
             <Route 
             path='/admin/applicants' 
             element={<Applicants isSubscribed={isSubscribed} isLoggedIn={isLoggedIn} userId={userId} clearToken={clearToken} />} 
+        />
+        )}
+        
+        {isAdmin &&(
+            <Route 
+            path='/users' 
+            element={<Users isSubscribed={isSubscribed} isLoggedIn={isLoggedIn} userId={userId} clearToken={clearToken} />} 
         />
         )}
         

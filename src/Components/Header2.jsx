@@ -71,7 +71,7 @@ const Header2 = ({
                 </a>
               </li>
               <li>
-                <a className="dropdown-item" href="#jobs">
+                <a className="dropdown-item" href="/careers">
                   Job Opportunities
                 </a>
               </li>

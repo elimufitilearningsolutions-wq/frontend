@@ -44,7 +44,7 @@ const Footer2 = () => {
           <div className="col-12 col-md-2 mb-4">
             <a className="footer-link-bold text-light mb-3" href="/">ABOUT</a>
             <ul className="list-unstyled custom-footer-text py-2">
-              <li><a className="custom-footer-text" href="/">Meet the Team</a></li>
+              <li><a className="custom-footer-text" href="/users">Admin</a></li>
               <li><a className="custom-footer-text" href="/careers">Careers at Our Company</a></li>
               <li><a className="custom-footer-text" href="/">Customer Testimonials</a></li>
               <li><a className="custom-footer-text" href="/">Our Partners</a></li>

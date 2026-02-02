@@ -49,12 +49,12 @@ const Footer2 = () => {
               <li><a className="custom-footer-text" href="/">Customer Testimonials</a></li>
               <li><a className="custom-footer-text" href="/">Our Partners</a></li>
               <li><a className="custom-footer-text" href="/">Our Offices & Locations</a></li>
-              <li><a className="custom-footer-text" href="/">Contact Us</a></li>
+              <li><a className="custom-footer-text" href="/subscription">Activate Access</a></li>
             </ul>
           </div>
           {/* Column 5 */}
           <div className="col-12 col-md-2 mb-4">
-            <a className="footer-link-bold text-light mb-3" href="/">CONNECT WITH E.L.S</a>
+            <a className="footer-link-bold text-light mb-3" href="/subscription">CONNECT WITH E.L.S</a>
             <ul className="list-unstyled custom-footer-text py-2">
               <li><a className="custom-footer-text" href="/">Follow Us on Facebook</a></li>
               <li><a className="custom-footer-text" href="/">Follow Us on Instagram</a></li>

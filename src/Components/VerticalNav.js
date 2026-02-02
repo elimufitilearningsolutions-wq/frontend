@@ -4,7 +4,7 @@ const VerticalNav = ({ onClick, isAdmin , userId, isLoggedIn, clearToken, isSubs
         <ul className="nav flex-column">
           <li className="nav-item d-flex align-items-center ">
             <span className ="bi bi-question-circle me-2"></span>
-            <a className=" nav-link" href="/subscription">Subscribe Now</a>
+            <a className=" nav-link" href="/subscription">Unlock CBE Resources</a>
           </li>
           <li className="nav-item d-flex align-items-center">
           <span className="bi bi-gear-fill me-2"></span>

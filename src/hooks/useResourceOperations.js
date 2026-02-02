@@ -58,14 +58,23 @@ export const useDownloadHandler = () => {
 
       console.log("Download successful");
 
-    } catch (error) {
-      if (signal.aborted) {
-        console.log('Download aborted by user');
-      } else {
-        setErrorMessage(error.message);
-        console.error("Download error:", error.message);
-      }
-    }
+   } catch (error) {
+  if (signal.aborted) {
+    console.log('Download aborted by user');
+    return;
+  }
+
+  const message =
+    error.response?.data?.message ||
+    error.message ||
+    'Something went wrong';
+
+  setErrorMessage(message);
+  setShowModal(true); // 🔥 THIS WAS MISSING
+
+  console.error("Download error:", message);
+}
+
   };
 
   const closeModal = () => {

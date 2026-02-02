@@ -35,7 +35,7 @@ const Header2 = ({
 
           <li className="nav-item d-none d-md-block">
             <a className="nav-link text-white" href="/subscription">
-              Subscribe Now
+              Unlock CBE Resources
             </a>
           </li>
 

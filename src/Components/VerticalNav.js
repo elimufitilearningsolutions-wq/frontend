@@ -20,7 +20,7 @@ const VerticalNav = ({ onClick, isAdmin , userId, isLoggedIn, clearToken, isSubs
                   <a className="dropdown-item" href="/school/resources">School Resources</a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="/">Job Opportunities</a>
+                  <a className="dropdown-item" href="/careers">Job Opportunities</a>
                 </li>
               </ul>
             </li>

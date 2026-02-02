@@ -116,20 +116,26 @@ const Careers = () => {
             </p>
 
             {/* JOBS SECTION (DISPLAY ONLY) */}
-            <div className="mt-4 text-start">
-              <h5 className="fw-bold mb-3">Current Open Positions</h5>
-              <ul className="list-unstyled" style={{ fontSize: "16px", lineHeight: "1.8" }}>
-                {JOBS.map((job) => (
-                  <li key={job.id}>
-                    📌 <strong>{job.title}</strong> – {job.slots} Position
-                    {job.slots > 1 ? "s" : ""}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-3 fw-medium">
-                Apply using the form provided.
-              </p>
-            </div>
+              <div className="mt-4 text-center">
+                <h5 className="fw-bold mb-3">Current Open Positions</h5>
+
+                <ul
+                  className="list-unstyled d-inline-block text-start"
+                  style={{ fontSize: "16px", lineHeight: "1.8" }}
+                >
+                  {JOBS.map((job) => (
+                    <li key={job.id}>
+                      📌 <strong>{job.title}</strong> – {job.slots} Position
+                      {job.slots > 1 ? "s" : ""}
+                    </li>
+                  ))}
+                </ul>
+
+                <p className="mt-3 fw-medium">
+                  Apply using the form provided.
+                </p>
+              </div>
+
           </div>
 
           {/* RIGHT COLUMN (FORM UNCHANGED) */}

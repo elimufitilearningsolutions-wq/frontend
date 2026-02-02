@@ -39,15 +39,22 @@ const Users = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Phone</th>
-              <th>Role</th>
-              <th>Registered On</th>
+              <th>Admin</th>
+              <th>Subscribed</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Transaction Date</th>
+              <th>M-Pesa Receipt</th>
+              <th>Checkout ID</th>
+              <th>Failure Reason</th>
+              <th>Token</th>
             </tr>
           </thead>
 
           <tbody>
             {users.length === 0 && (
               <tr>
-                <td colSpan="6" className="text-center py-4">
+                <td colSpan="13" className="text-center py-4">
                   No users found
                 </td>
               </tr>
@@ -59,17 +66,54 @@ const Users = () => {
                 <td>{u.name}</td>
                 <td>{u.email}</td>
                 <td>{u.phoneNumber || "—"}</td>
+
                 <td>
-                  {u.isAdmin === 1 ? (
-                    <span className="badge bg-danger">Admin</span>
-                  ) : (
-                    <span className="badge bg-primary">User</span>
-                  )}
+                  <span className={`badge ${u.isAdmin ? "bg-danger" : "bg-secondary"}`}>
+                    {u.isAdmin ? "Yes" : "No"}
+                  </span>
                 </td>
+
                 <td>
-                  {u.created_at
-                    ? new Date(u.created_at).toLocaleDateString()
+                  <span className={`badge ${u.isSubscribed ? "bg-success" : "bg-warning text-dark"}`}>
+                    {u.isSubscribed ? "Yes" : "No"}
+                  </span>
+                </td>
+
+                <td>{u.amount ? `KES ${u.amount}` : "—"}</td>
+
+                <td>
+                  <span className={`badge ${
+                    u.status === "SUCCESS"
+                      ? "bg-success"
+                      : u.status === "FAILED"
+                      ? "bg-danger"
+                      : "bg-secondary"
+                  }`}>
+                    {u.status || "—"}
+                  </span>
+                </td>
+
+                <td>
+                  {u.transactionDate
+                    ? new Date(u.transactionDate).toLocaleString()
                     : "—"}
+                </td>
+
+                <td>{u.mpesaReceiptNumber || "—"}</td>
+                <td>{u.checkoutRequestID || "—"}</td>
+                <td>{u.FailureReason || "—"}</td>
+
+                <td style={{ maxWidth: "160px" }}>
+                  {u.current_token ? (
+                    <span
+                      className="text-truncate d-inline-block"
+                      title={u.current_token}
+                    >
+                      Active
+                    </span>
+                  ) : (
+                    <span className="text-muted">None</span>
+                  )}
                 </td>
               </tr>
             ))}

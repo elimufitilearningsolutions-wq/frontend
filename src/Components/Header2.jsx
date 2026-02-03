@@ -1,30 +1,23 @@
-import React, { useState } from "react";
-import VerticalNav from "./VerticalNav";
+import React from "react";
 import logo from "../images/logo.PNG";
 import "../assets/header2.css";
 
 const Header2 = ({
-  onClick,
   isAdmin,
   userId,
   isLoggedIn,
   clearToken,
   isSubscribed,
 }) => {
-  const [verticalNavVisible, setVerticalNavVisible] = useState(false);
-
-  const toggleClick = (e) => {
-    e.preventDefault();
-    setVerticalNavVisible((prev) => !prev);
-    onClick?.(e);
-  };
 
   return (
     <div className="header2-container container-fluid text-white p-2 d-flex justify-content-between align-items-center">
-      
+
       {/* LEFT NAV */}
       <nav>
         <ul className="nav align-items-center">
+
+          {/* LOGO */}
           <li className="nav-item">
             <img
               src={logo}
@@ -33,13 +26,14 @@ const Header2 = ({
             />
           </li>
 
-          <li className="nav-item d-none d-md-block">
+          {/* UNLOCK CBE RESOURCES – all screens */}
+          <li className="nav-item">
             <a className="nav-link text-white" href="/subscription">
               Unlock CBE Resources
             </a>
           </li>
 
-          {/* SOLUTIONS */}
+          {/* SOLUTIONS – desktop only */}
           <li className="nav-item dropdown d-none d-md-block">
             <button
               className="nav-link dropdown-toggle btn btn-link text-white"
@@ -55,8 +49,8 @@ const Header2 = ({
             </ul>
           </li>
 
-          {/* RESOURCES */}
-          <li className="nav-item dropdown d-none d-md-block">
+          {/* RESOURCES – all screens */}
+          <li className="nav-item dropdown">
             <button
               className="nav-link dropdown-toggle btn btn-link text-white"
               data-bs-toggle="dropdown"
@@ -83,7 +77,7 @@ const Header2 = ({
             </ul>
           </li>
 
-          {/* ABOUT */}
+          {/* ABOUT – desktop only */}
           <li className="nav-item dropdown d-none d-md-block">
             <button
               className="nav-link dropdown-toggle btn btn-link text-white"
@@ -99,7 +93,7 @@ const Header2 = ({
             </ul>
           </li>
 
-          {/* CONTACT */}
+          {/* CONTACT – desktop only */}
           <li className="nav-item dropdown d-none d-md-block">
             <button
               className="nav-link dropdown-toggle btn btn-link text-white"
@@ -114,6 +108,7 @@ const Header2 = ({
             </ul>
           </li>
 
+          {/* SIGN IN – desktop only */}
           {!isLoggedIn && (
             <li className="nav-item d-none d-md-block">
               <a className="nav-link text-white" href="/signup">
@@ -125,8 +120,20 @@ const Header2 = ({
       </nav>
 
       {/* RIGHT SIDE */}
-      <div className="d-none d-md-block">
-        {isLoggedIn ? (
+      <div className="d-flex align-items-center gap-2">
+
+        {/* SIGN IN – MOBILE ONLY */}
+        {!isLoggedIn && (
+          <a
+            href="/signup"
+            className="btn btn-outline-light btn-sm d-block d-md-none"
+          >
+            Sign In
+          </a>
+        )}
+
+        {/* LOGOUT – ALL SCREENS */}
+        {isLoggedIn && (
           <button
             type="button"
             className="btn btn-outline-light btn-sm"
@@ -134,34 +141,15 @@ const Header2 = ({
           >
             Logout
           </button>
-        ) : (
-          <p className="qwitcher-grypen-bold mb-0">
+        )}
+
+        {!isLoggedIn && (
+          <p className="qwitcher-grypen-bold mb-0 d-none d-md-block">
             elimufiti learning solutions
           </p>
         )}
       </div>
 
-      {/* MOBILE TOGGLE */}
-      <button
-        type="button"
-        className="toggle-Box d-block d-sm-none"
-        onClick={toggleClick}
-        aria-label="Toggle navigation menu"
-      >
-        <span className="icon-container">
-          <span className="middle"></span>
-        </span>
-      </button>
-
-      {/* MOBILE NAV */}
-      {verticalNavVisible && (
-        <VerticalNav
-          isSubscribed={isSubscribed}
-          isLoggedIn={isLoggedIn}
-          userId={userId}
-          clearToken={clearToken}
-        />
-      )}
     </div>
   );
 };

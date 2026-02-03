@@ -2,17 +2,9 @@ import React from "react";
 import logo from "../images/logo.PNG";
 import "../assets/header2.css";
 
-const Header2 = ({
-  isAdmin,
-  userId,
-  isLoggedIn,
-  clearToken,
-  isSubscribed,
-}) => {
-
+const Header2 = ({ isAdmin, isLoggedIn, clearToken }) => {
   return (
-  <div className="header2-container container-fluid text-white px-2 py-2 d-flex align-items-center">
-
+    <div className="header2-container container-fluid text-white px-2 py-2 d-flex align-items-center justify-content-between">
 
       {/* LEFT NAV */}
       <nav>
@@ -30,7 +22,7 @@ const Header2 = ({
           {/* UNLOCK CBE RESOURCES – all screens */}
           <li className="nav-item">
             <a className="nav-link text-white" href="/subscription">
-              Unlock  Resources
+              Unlock Resources
             </a>
           </li>
 
@@ -50,7 +42,7 @@ const Header2 = ({
             </ul>
           </li>
 
-          {/* RESOURCES – all screens */}
+          {/* HUB – all screens */}
           <li className="nav-item dropdown">
             <button
               className="nav-link dropdown-toggle btn btn-link text-white"
@@ -108,56 +100,46 @@ const Header2 = ({
               <li className="dropdown-item">Email: info@elimufiti.co.ke</li>
             </ul>
           </li>
-
-          {/* SIGN IN – desktop only */}
-          {!isLoggedIn && (
-            <li className="nav-item d-none d-md-block">
-              <a className="nav-link text-white" href="/signup">
-                Sign In
-              </a>
-            </li>
-          )}
         </ul>
       </nav>
 
-      {/* RIGHT SIDE */}
+      {/* RIGHT SIDE – Sign In / Logout / Site Name */}
       <div className="d-flex align-items-center gap-2 flex-nowrap">
 
-  {/* SIGN IN – MOBILE ONLY */}
-  {!isLoggedIn && (
-    <a
-      href="/signup"
-      className="btn btn-sm d-block d-md-none text-light p-0"
-      style={{
-        border: "none",
-        background: "transparent",
-        whiteSpace: "nowrap"
-      }}
-    >
-      Sign In
-    </a>
-  )}
+        {/* SITE NAME – desktop only, when not logged in */}
+        {!isLoggedIn && (
+          <p className="qwitcher-grypen-bold mb-0 d-none d-md-block">
+            elimufiti learning solutions
+          </p>
+        )}
 
-  {/* LOGOUT – ALL SCREENS */}
-  {isLoggedIn && (
-    <button
-      type="button"
-      className="btn btn-sm d-block d-md-none text-light p-0"
-      onClick={clearToken}
-    >
-      Logout
-    </button>
-  )}
+        {/* SIGN IN – all screens when not logged in */}
+        {!isLoggedIn && (
+          <a
+            href="/signup"
+            className="btn btn-sm text-light p-0"
+            style={{
+              border: "none",
+              background: "transparent",
+              whiteSpace: "nowrap"
+            }}
+          >
+            Sign In
+          </a>
+        )}
 
-  {/* SITE NAME – DESKTOP ONLY */}
-  {!isLoggedIn && (
-    <p className="qwitcher-grypen-bold mb-0 d-none d-md-block">
-      elimufiti learning solutions
-    </p>
-  )}
-</div>
+        {/* LOGOUT – all screens when logged in */}
+        {isLoggedIn && (
+          <button
+            type="button"
+            className="btn btn-sm text-light p-0"
+            onClick={clearToken}
+          >
+            Logout
+          </button>
+        )}
 
-
+      </div>
     </div>
   );
 };

@@ -11,7 +11,8 @@ const Header2 = ({
 }) => {
 
   return (
-    <div className="header2-container container-fluid text-white p-2 d-flex justify-content-between align-items-center">
+  <div className="header2-container container-fluid text-white px-2 py-2 d-flex align-items-center">
+
 
       {/* LEFT NAV */}
       <nav>
@@ -29,7 +30,7 @@ const Header2 = ({
           {/* UNLOCK CBE RESOURCES – all screens */}
           <li className="nav-item">
             <a className="nav-link text-white" href="/subscription">
-              Unlock CBE Resources
+              Unlock  Resources
             </a>
           </li>
 
@@ -56,7 +57,7 @@ const Header2 = ({
               data-bs-toggle="dropdown"
               type="button"
             >
-              Resources
+              Hub
             </button>
             <ul className="dropdown-menu mt-2">
               <li>
@@ -120,35 +121,42 @@ const Header2 = ({
       </nav>
 
       {/* RIGHT SIDE */}
-      <div className="d-flex align-items-center gap-2">
+      <div className="d-flex align-items-center gap-2 flex-nowrap">
 
-        {/* SIGN IN – MOBILE ONLY */}
-        {!isLoggedIn && (
-          <a
-            href="/signup"
-            className="btn btn-outline-light btn-sm d-block d-md-none"
-          >
-            Sign In
-          </a>
-        )}
+  {/* SIGN IN – MOBILE ONLY */}
+  {!isLoggedIn && (
+    <a
+      href="/signup"
+      className="btn btn-sm d-block d-md-none text-light p-0"
+      style={{
+        border: "none",
+        background: "transparent",
+        whiteSpace: "nowrap"
+      }}
+    >
+      Sign In
+    </a>
+  )}
 
-        {/* LOGOUT – ALL SCREENS */}
-        {isLoggedIn && (
-          <button
-            type="button"
-            className="btn btn-outline-light btn-sm"
-            onClick={clearToken}
-          >
-            Logout
-          </button>
-        )}
+  {/* LOGOUT – ALL SCREENS */}
+  {isLoggedIn && (
+    <button
+      type="button"
+      className="btn btn-sm d-block d-md-none text-light p-0"
+      onClick={clearToken}
+    >
+      Logout
+    </button>
+  )}
 
-        {!isLoggedIn && (
-          <p className="qwitcher-grypen-bold mb-0 d-none d-md-block">
-            elimufiti learning solutions
-          </p>
-        )}
-      </div>
+  {/* SITE NAME – DESKTOP ONLY */}
+  {!isLoggedIn && (
+    <p className="qwitcher-grypen-bold mb-0 d-none d-md-block">
+      elimufiti learning solutions
+    </p>
+  )}
+</div>
+
 
     </div>
   );

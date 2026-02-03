@@ -25,9 +25,7 @@ const Careers = () => {
     applicationType: "",
     startDate: "",
     employmentStatus: "",
-    resumeSubmission: "upload",
     resumeFile: null,
-    resumeUrl: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -59,10 +57,8 @@ const Careers = () => {
       submitData.append("startDate", formData.startDate);
       submitData.append("employmentStatus", formData.employmentStatus);
 
-      if (formData.resumeSubmission === "upload" && formData.resumeFile) {
+      if (formData.resumeFile) {
         submitData.append("resume", formData.resumeFile);
-      } else if (formData.resumeSubmission === "url" && formData.resumeUrl) {
-        submitData.append("resumeUrl", formData.resumeUrl);
       }
 
       const apiUrl = config.API_BASE_URL;
@@ -81,9 +77,7 @@ const Careers = () => {
         applicationType: "",
         startDate: "",
         employmentStatus: "",
-        resumeSubmission: "upload",
         resumeFile: null,
-        resumeUrl: "",
       });
     } catch (error) {
       console.error("Error submitting application:", error);
@@ -115,30 +109,26 @@ const Careers = () => {
               exceptional service, and cutting-edge solutions.
             </p>
 
-            {/* JOBS SECTION (DISPLAY ONLY) */}
-              <div className="mt-4 text-center">
-                <h5 className="fw-bold mb-3">Current Open Positions</h5>
+            <div className="mt-4 text-center">
+              <h5 className="fw-bold mb-3">Current Open Positions</h5>
 
-                <ul
-                  className="list-unstyled d-inline-block text-start"
-                  style={{ fontSize: "16px", lineHeight: "1.8" }}
-                >
-                  {JOBS.map((job) => (
-                    <li key={job.id}>
-                      📌 <strong>{job.title}</strong> – {job.slots} Position
-                      {job.slots > 1 ? "s" : ""}
-                    </li>
-                  ))}
-                </ul>
+              <ul
+                className="list-unstyled d-inline-block text-start"
+                style={{ fontSize: "16px", lineHeight: "1.8" }}
+              >
+                {JOBS.map((job) => (
+                  <li key={job.id}>
+                    📌 <strong>{job.title}</strong> – {job.slots} Position
+                    {job.slots > 1 ? "s" : ""}
+                  </li>
+                ))}
+              </ul>
 
-                <p className="mt-3 fw-medium">
-                  Apply using the form provided.
-                </p>
-              </div>
-
+              <p className="mt-3 fw-medium">Apply using the form provided.</p>
+            </div>
           </div>
 
-          {/* RIGHT COLUMN (FORM UNCHANGED) */}
+          {/* RIGHT COLUMN */}
           <div className="col-md-6 mb-4">
             <div className="card p-5 shadow-lg custom_form">
               <h5 className="text-center mb-4 fw-bold">
@@ -222,51 +212,16 @@ const Careers = () => {
                 </div>
 
                 <div className="mb-4">
-                  <p className="fw-medium mb-2">Resume submission method:</p>
-                  {["upload", "url"].map((method) => (
-                    <div className="form-check form-check-modern mb-2" key={method}>
-                      <input
-                        type="radio"
-                        className="form-check-input"
-                        name="resumeSubmission"
-                        id={method}
-                        value={method}
-                        checked={formData.resumeSubmission === method}
-                        onChange={handleChange}
-                      />
-                      <label className="form-check-label" htmlFor={method}>
-                        {method === "upload" ? "Upload file" : "Provide URL"}
-                      </label>
-                    </div>
-                  ))}
+                  <label htmlFor="resumeFile" className="form-label fw-medium">
+                    Upload Resume
+                  </label>
+                  <input
+                    type="file"
+                    id="resumeFile"
+                    className="form-control form-control-modern"
+                    onChange={handleChange}
+                  />
                 </div>
-
-                {formData.resumeSubmission === "upload" ? (
-                  <div className="mb-4">
-                    <label htmlFor="resumeFile" className="form-label fw-medium">
-                      Upload Resume
-                    </label>
-                    <input
-                      type="file"
-                      id="resumeFile"
-                      className="form-control form-control-modern"
-                      onChange={handleChange}
-                    />
-                  </div>
-                ) : (
-                  <div className="mb-4">
-                    <label htmlFor="resumeUrl" className="form-label fw-medium">
-                      Resume URL
-                    </label>
-                    <input
-                      type="url"
-                      id="resumeUrl"
-                      className="form-control form-control-modern"
-                      value={formData.resumeUrl}
-                      onChange={handleChange}
-                    />
-                  </div>
-                )}
 
                 <div className="d-grid">
                   <button

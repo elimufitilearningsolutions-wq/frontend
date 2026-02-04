@@ -100,44 +100,48 @@ export const useDeleteHandler = () => {
    * @param {string} params.table - e.g., "schemes"
    * @param {Array<number>} params.ids - array of IDs to delete
    */
-  const handleDeleteExam = async ({ path, table, ids }) => {
-    try {
-      if (!ids || ids.length === 0) return;
+const handleDeleteExam = async ({ path, table, ids }) => {
+  try {
+    if (!ids || ids.length === 0) return;
 
-      const apiUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000";
+    const apiUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000";
 
-      // Map path to schema name
-      const schemaMap = {
-        primary: "elimufi1_primaryschool",
-        secondary: "elimufi1_secondaryschool",
-        jss: "elimufi1_jss",
-        preprimary: "elimufi1_preprimary",
-        senior: "elimufi1_senior",
-        college: "elimufi1_college",
-        users: "elimufi1_users"
-      };
-      const schema = schemaMap[path] || "default_schema";
+    // Map path to schema name
+    const schemaMap = {
+      primary: "elimufi1_primaryschool",
+      secondary: "elimufi1_secondaryschool",
+      jss: "elimufi1_jss",
+      preprimary: "elimufi1_preprimary",
+      senior: "elimufi1_senior",
+      college: "elimufi1_college",
+      users: "elimufi1_users"
+    };
 
-      // Bulk delete endpoint
-      const url = `${apiUrl}/${path}/${table}/bulk`;
+    // 🔹 Normalize path to handle 'pre/primary' etc
+    const normalizedPath = path.replace(/\//g, '').toLowerCase();
+    const schema = schemaMap[normalizedPath];
 
-      console.log("Deleting bulk items:", { url, schema, table, ids });
+    if (!schema) throw new Error(`Invalid path provided: ${path}`);
 
-      const response = await axios.post(url, { schema, table, ids });
+    const url = `${apiUrl}/${path}/${table}/bulk`;
 
-      if (response.status !== 200) {
-        throw new Error(`Unexpected response status: ${response.status}`);
-      }
+    console.log("Deleting bulk items:", { url, schema, table, ids });
 
-      setShowDeleteModal(false);
-      setErrorMessage('');
-      console.log("Bulk delete successful");
+    const response = await axios.post(url, { schema, table, ids });
 
-    } catch (error) {
-      setErrorMessage(error.message);
-      console.error('Error deleting scheme:', error);
+    if (response.status !== 200) {
+      throw new Error(`Unexpected response status: ${response.status}`);
     }
-  };
+
+    setShowDeleteModal(false);
+    setErrorMessage('');
+    console.log("Bulk delete successful");
+
+  } catch (error) {
+    setErrorMessage(error.message);
+    console.error('Error deleting scheme:', error);
+  }
+};
 
   const closeDeleteModal = () => {
     setShowDeleteModal(false);

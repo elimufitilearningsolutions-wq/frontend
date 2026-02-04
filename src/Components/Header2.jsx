@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../images/logo.PNG";
+import logo from "../images/logo.png";
 import "../assets/header2.css";
 
 const Header2 = ({ isAdmin, isLoggedIn, clearToken }) => {
@@ -15,7 +15,7 @@ const Header2 = ({ isAdmin, isLoggedIn, clearToken }) => {
             <img
               src={logo}
               alt="Elimufiti logo"
-              style={{ width: 35, height: 35, borderRadius: "50%" }}
+              style={{ width: 60, height: 60, borderRadius: "50%" }}
             />
           </li>
 

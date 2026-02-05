@@ -17,11 +17,13 @@
         { label: "PP2 EXAMS", value: "/pp2/exams" , path: "pre/primary"},
         { label: "PRE-PRIMARY HOLIDAY REVISIONS", value: "/pre/primary/holiday/assignments" , path: "pre/primary"},       
         { label: "PLAYGROUP COLOURING PAGES", value: "/play/group/colouring" , path: "pre/primary"},       
+        { label: "PRE PRIMARY LESSON PLANS", value: "/pre/primary/lesson/plans" , path: "pre/primary"},       
         
     ]
 
    export  const primaryItems = [
         { label: "PRIMARY SCHEMES OF WORK", value: "/primary/schemes",path: "primary" },
+        { label: "PRIMARY LESSON PLANS", value: "/primary/lesson/plans",path: "primary" },
         { label: "PRIMARY CURRICULUM DESIGNS", value: "/primary/curriculum/designs" ,path: "primary"},
         { label: "PRIMARY ASSESSMENT TOOLS ", value: "/primary/assessment/tools" ,path: "primary"},
         { label: "PRIMARY REVISION NOTES ", value: "/primary/revision/notes" ,path: "primary"},
@@ -48,6 +50,7 @@ export const jssItems = [
 ]
 export const seniorSchoolItems = [
         { label: "SENIOR SCHOOL SCHEMES OF WORK ", value: "/senior/school/schemes",path: "senior" },       
+        { label: "SENIOR SCHOOL LESSON PLANS ", value: "/senior/school/lesson/plans",path: "senior" },       
         { label: "GRADE 10 EXAMINATIONS  ", value: "/grade10/examinations" ,path: "senior"},        
         { label: "SENIOR SCHOOL CURRICULUM DESIGNS  ", value: "/senior/school/curriculum/designs" ,path: "senior"},
         { label: "SENIOR SCHOOL NOTES  ", value: "/senior/school/notes" ,path: "senior"},        

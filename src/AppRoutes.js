@@ -99,6 +99,12 @@ import PlayGroupColouring from './Components/PlayGroupColouringPages';
 import PlayGroupColouringDownloads from './Components/PlayGroupColouringPagesDownloads';
 import Applicants from './Components/Apllicants';
 import Users from './Components/Users';
+import PrePrimaryLessonPlans from './Components/PreprimaryLessonPlan';
+import PrePrimaryLessonPlanDownloads from './Components/PreprimaryLessonPlanDownloads';
+import PrimaryLessonPlans from './Components/PrimaryLessonPlan';
+import PrimaryLessonPlanDownloads from './Components/PrimaryLessonPlanDownloads';
+import SeniorSchoolLessonPlans from './Components/SeniorSchoolLessonPlans';
+import SeniorSchoolLessonPlanDownloads from './Components/SeniorSchoolLessonPlanDownloads';
 
 
 const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIsLoggedIn, setUserId, setShowModal }) => (
@@ -152,6 +158,56 @@ const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIs
         <Route 
         path="/pre/primary/schemes" 
         element={<PrePrimarySchemes isAdmin={isAdmin}
+         userId={userId} 
+         isLoggedIn={isLoggedIn} 
+         clearToken={clearToken} 
+         isSubscribed={isSubscribed} />}
+        />
+
+        <Route 
+        path="/pre/primary/lesson/plans" 
+        element={<PrePrimaryLessonPlans isAdmin={isAdmin}
+         userId={userId} 
+         isLoggedIn={isLoggedIn} 
+         clearToken={clearToken} 
+         isSubscribed={isSubscribed} />}
+        />
+        <Route 
+        path="/preprimary/lesson/plan/downloads" 
+        element={<PrePrimaryLessonPlanDownloads isAdmin={isAdmin}
+         userId={userId} 
+         isLoggedIn={isLoggedIn} 
+         clearToken={clearToken} 
+         isSubscribed={isSubscribed} />}
+        />
+
+        <Route 
+        path="/primary/lesson/plans" 
+        element={<PrimaryLessonPlans isAdmin={isAdmin}
+         userId={userId} 
+         isLoggedIn={isLoggedIn} 
+         clearToken={clearToken} 
+         isSubscribed={isSubscribed} />}
+        />
+        <Route 
+        path="/primary/lesson/plan/downloads" 
+        element={<PrimaryLessonPlanDownloads isAdmin={isAdmin}
+         userId={userId} 
+         isLoggedIn={isLoggedIn} 
+         clearToken={clearToken} 
+         isSubscribed={isSubscribed} />}
+        />
+        <Route 
+        path="/senior/school/lesson/plans" 
+        element={<SeniorSchoolLessonPlans isAdmin={isAdmin}
+         userId={userId} 
+         isLoggedIn={isLoggedIn} 
+         clearToken={clearToken} 
+         isSubscribed={isSubscribed} />}
+        />
+        <Route 
+        path="/senior/school/lesson/plan/downloads" 
+        element={<SeniorSchoolLessonPlanDownloads isAdmin={isAdmin}
          userId={userId} 
          isLoggedIn={isLoggedIn} 
          clearToken={clearToken} 

@@ -51,8 +51,10 @@ const handleClick = (items, value) => {
   switch (value) {
     case "/primary/schemes":
     case "/primary/revision/notes":
+    case "/pre/primary/lesson/plans":
     case "/primary/curriculum/designs":
     case "/primary/assessment/tools":
+    case "/primary/lesson/plans":
     case "/grade1/examinations":
     case "/grade2/examinations":
     case "/grade3/examinations":
@@ -80,6 +82,7 @@ const handleClick = (items, value) => {
     case "/senior/school/schemes":
     case "/grade10/examinations":
     case "/senior/school/notes":
+    case "/senior/school/lesson/plans":
     case "/senior/school/curriculum/designs":
     case "/pre/primary/schemes":
     case "/pre/primary/curriculum/designs":

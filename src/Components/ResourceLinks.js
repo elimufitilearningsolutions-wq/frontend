@@ -170,11 +170,11 @@ const handleClick = (items, value) => {
   {/* Top action buttons */}
   <div className="d-flex flex-wrap gap-2 justify-content-center mb-3">
     <button onClick={() => openPdf(seniorSchoolsPdf)} className="btn btn-primary btn-sm rounded-pill px-4">
-      Senior Schools in Kenya
+      Senior Schools in Kenya (MOE)
     </button>
 
     <button  onClick={() => openPdf(seniorSubjectsCombinationssPdf)} className="btn btn-outline-primary btn-sm rounded-pill px-4">
-      Subject Combinations
+      Subject Combinations (MOE)
     </button>
   </div>
 

@@ -12,6 +12,13 @@ import {
 } from "./schoolItems.js";
 import config from "../config.js";
 import "../assets/resourceLinks.css";
+import seniorSchoolsPdf from "../assets/pdf/MoE - Senior Schools in Kenya.pdf";
+import seniorSubjectsCombinationssPdf from "../assets/pdf/MoE - Subject Combinations for Senior Schools.pdf"
+
+const openPdf = (pdfUrl) => {
+  window.open(pdfUrl, "_blank", "noopener,noreferrer");
+};
+
 
 const ResourceLinks = () => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -158,9 +165,27 @@ const handleClick = (items, value) => {
 
       <div className="w-100 custom-background-jss text-center">
         <header className="schoolTittle">{schoolTittles.senior}</header>
-        <ul className="list-group pt-4 pb-4 border-0">
-          {renderListItems(seniorSchoolItems)}
-        </ul>
+<div className="pt-4 pb-4">
+
+  {/* Top action buttons */}
+  <div className="d-flex flex-wrap gap-2 justify-content-center mb-3">
+    <button onClick={() => openPdf(seniorSchoolsPdf)} className="btn btn-primary btn-sm rounded-pill px-4">
+      Senior Schools in Kenya
+    </button>
+
+    <button  onClick={() => openPdf(seniorSubjectsCombinationssPdf)} className="btn btn-outline-primary btn-sm rounded-pill px-4">
+      Subject Combinations
+    </button>
+  </div>
+
+  {/* Rendered list items */}
+  <ul className="list-group border-0 mx-auto" style={{ maxWidth: "900px" }}>
+    {renderListItems(seniorSchoolItems)}
+  </ul>
+
+</div>
+
+
       </div>
 
       <div className="w-100 custom-background-sec text-center">

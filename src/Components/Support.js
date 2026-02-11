@@ -8,6 +8,7 @@ import config from '../config.js';
 ======================= */
 const categoryTableMap = {
     "create/schemes": "schemes",
+    "create/teaching/aids": "teaching_aids",
     "create/lesson/plans": "lesson_plans",
     "create/notes": "notes",
     "create/curriculum/designs": "curriculum_designs",

@@ -18,6 +18,7 @@
         { label: "PRE-PRIMARY HOLIDAY REVISIONS", value: "/pre/primary/holiday/assignments" , path: "pre/primary"},       
         { label: "PLAYGROUP COLOURING PAGES", value: "/play/group/colouring" , path: "pre/primary"},       
         { label: "PRE PRIMARY LESSON PLANS", value: "/pre/primary/lesson/plans" , path: "pre/primary"},       
+        { label: "PRE PRIMARY TEACHING AIDS", value: "/pre/primary/teaching/aids" , path: "pre/primary"},       
         
     ]
 

@@ -105,6 +105,8 @@ import PrimaryLessonPlans from './Components/PrimaryLessonPlan';
 import PrimaryLessonPlanDownloads from './Components/PrimaryLessonPlanDownloads';
 import SeniorSchoolLessonPlans from './Components/SeniorSchoolLessonPlans';
 import SeniorSchoolLessonPlanDownloads from './Components/SeniorSchoolLessonPlanDownloads';
+import PrePrimaryTeachingAids from './Components/PrePrimaryTeachingAids';
+import PrePrimaryTeachingAidDownload from "./Components/PrePrimaryTeachingAidDownloads"
 
 
 const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIsLoggedIn, setUserId, setShowModal }) => (
@@ -225,6 +227,22 @@ const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIs
         <Route 
         path="/play/group/colouring/downloads" 
         element={<PlayGroupColouringDownloads isAdmin={isAdmin}
+         userId={userId} 
+         isLoggedIn={isLoggedIn} 
+         clearToken={clearToken} 
+         isSubscribed={isSubscribed} />}
+        />
+        <Route 
+        path="/pre/primary/teaching/aids" 
+        element={<PrePrimaryTeachingAids isAdmin={isAdmin}
+         userId={userId} 
+         isLoggedIn={isLoggedIn} 
+         clearToken={clearToken} 
+         isSubscribed={isSubscribed} />}
+        />
+        <Route 
+        path="/preprimary/teaching/aid/downloads" 
+        element={<PrePrimaryTeachingAidDownload isAdmin={isAdmin}
          userId={userId} 
          isLoggedIn={isLoggedIn} 
          clearToken={clearToken} 

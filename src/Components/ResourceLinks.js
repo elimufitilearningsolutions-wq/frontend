@@ -93,6 +93,7 @@ const handleClick = (items, value) => {
     case "/senior/school/curriculum/designs":
     case "/pre/primary/schemes":
     case "/pre/primary/curriculum/designs":
+    case "/pre/primary/teaching/aids":
     case "/pre/primary/holiday/assignments":
     case "/primary/holiday/assignments":
     case "/dpte/notes":

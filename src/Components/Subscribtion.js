@@ -10,6 +10,7 @@ const socket = io(process.env.REACT_APP_SOCKET_URL, {
   transports: ["websocket"], // enforce WebSocket
   autoConnect: false,        // connect manually
 });
+console.log("✅ SOCKET URL from .env:", process.env.REACT_APP_SOCKET_URL);
 
 const Subscribe = ({ userId }) => {
   const navigate = useNavigate(); // ✅ added
@@ -60,7 +61,7 @@ const Subscribe = ({ userId }) => {
     socket.on("connect", handleConnect);
     socket.on("paymentSuccess", handlePaymentSuccess);
     socket.on("paymentFailed", handlePaymentFailed);
-    socket.on("connect_error", (err) => console.error("❌❌ Socket connection error:", err));
+    socket.on("connect_error", (err) => console.error("❌ Socket connection error:", err));
     socket.on("disconnect", (reason) => console.warn("⚠️ Socket disconnected:", reason));
 
     return () => {

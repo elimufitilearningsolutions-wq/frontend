@@ -60,7 +60,7 @@ const Subscribe = ({ userId }) => {
     socket.on("connect", handleConnect);
     socket.on("paymentSuccess", handlePaymentSuccess);
     socket.on("paymentFailed", handlePaymentFailed);
-    socket.on("connect_error", (err) => console.error("❌ Socket connection error:", err));
+    socket.on("connect_error", (err) => console.error("❌❌ Socket connection error:", err));
     socket.on("disconnect", (reason) => console.warn("⚠️ Socket disconnected:", reason));
 
     return () => {

@@ -5,12 +5,42 @@ import { useNavigate } from "react-router-dom"; // ✅ added
 import config from "../config";
 import "../assets/subscription.css";
 
-// Create a single socket instance for the app
-const socket = io(process.env.REACT_APP_SOCKET_URL, {
-  transports: ["websocket"], // enforce WebSocket
-  autoConnect: false,        // connect manually
+// Get Socket URL from env
+const socketUrl = process.env.REACT_APP_SOCKET_URL;
+
+// Fail loudly if missing
+if (!socketUrl) {
+  console.error("❌ REACT_APP_SOCKET_URL is NOT defined!");
+  throw new Error("Missing REACT_APP_SOCKET_URL environment variable. Set it in Vercel dashboard or .env.production before build.");
+}
+
+// Create Socket.IO client safely
+const socket = io(socketUrl, {
+  path: "/socket.io",        // match backend
+  transports: ["websocket"], // enforce WebSocket only
+  autoConnect: false,
+  secure: true,
+  reconnection: true,
+  reconnectionAttempts: 5,
+  timeout: 10000,
 });
-console.log("✅ SOCKET URL from .env:", process.env.REACT_APP_SOCKET_URL);
+
+// Debug logging
+socket.on("connect", () => {
+  console.log("✅ Socket connected:", socket.id);
+  console.log("🆔 Connected URL:", socket.io.uri);
+});
+
+socket.on("connect_error", (err) => {
+  console.error("❌ Socket connection error!");
+  console.error("Attempted URL:", socket.io.uri);
+  console.error("Error:", err.message);
+});
+
+socket.on("disconnect", (reason) => {
+  console.warn("⚠️ Socket disconnected:", reason);
+});
+
 
 const Subscribe = ({ userId }) => {
   const navigate = useNavigate(); // ✅ added

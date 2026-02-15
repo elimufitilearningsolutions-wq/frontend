@@ -135,6 +135,7 @@ export const useDeleteHandler = () => {
       if (!ids || ids.length === 0) return;
 
       const apiUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000";
+      console.log("rocess.env.REACT_APP_API_BASE_URL", apiUrl)
 
       const schemaMap = {
         primary: "elimufi1_primaryschool",

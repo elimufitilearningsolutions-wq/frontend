@@ -16,8 +16,8 @@ if (!socketUrl) {
 
 // Create Socket.IO client safely
 const socket = io(socketUrl, {
-  path: "/socket.io",        // match backend
-  transports: ["websocket"], // enforce WebSocket only
+  path: "/socket.io",
+  transports: ["websocket"],
   autoConnect: false,
   secure: true,
   reconnection: true,
@@ -41,17 +41,25 @@ socket.on("disconnect", (reason) => {
   console.warn("⚠️ Socket disconnected:", reason);
 });
 
-
 const Subscribe = ({ userId }) => {
-  const navigate = useNavigate(); // ✅ added
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     amount: "",
     phoneNumber: "",
     user_id: userId || "",
   });
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
+
+  // ✅ Packages
+  const packages = [
+    { label: "2 Days", amount: 50 },
+    { label: "1 Month", amount: 300 },
+    { label: "6 Months", amount: 750 },
+    { label: "1 Year", amount: 1500 },
+  ];
 
   useEffect(() => {
     if (!userId) return;
@@ -64,14 +72,10 @@ const Subscribe = ({ userId }) => {
     }
 
     const handleConnect = () => {
-      console.log("✅ Socket connected:", socket.id);
-      socket.emit("joinRoom", roomName, () => {
-        console.log("✅ Room joined:", roomName);
-      });
+      socket.emit("joinRoom", roomName);
     };
 
     const handlePaymentSuccess = (data) => {
-      console.log("💰 paymentSuccess event received:", data);
       setMessage({
         type: "success",
         text: `Payment Successful! Amount: KES ${data.Amount}, Receipt: ${data.MpesaReceiptNumber}`,
@@ -80,7 +84,6 @@ const Subscribe = ({ userId }) => {
     };
 
     const handlePaymentFailed = (data) => {
-      console.log("⚠️ paymentFailed event received:", data);
       setMessage({
         type: "error",
         text: `Payment Failed: ${data.reason}`,
@@ -91,15 +94,11 @@ const Subscribe = ({ userId }) => {
     socket.on("connect", handleConnect);
     socket.on("paymentSuccess", handlePaymentSuccess);
     socket.on("paymentFailed", handlePaymentFailed);
-    socket.on("connect_error", (err) => console.error("❌❌ Socket connection error:", err));
-    socket.on("disconnect", (reason) => console.warn("⚠️ Socket disconnected:", reason));
 
     return () => {
       socket.off("connect", handleConnect);
       socket.off("paymentSuccess", handlePaymentSuccess);
       socket.off("paymentFailed", handlePaymentFailed);
-      socket.off("connect_error");
-      socket.off("disconnect");
     };
   }, [userId]);
 
@@ -108,14 +107,16 @@ const Subscribe = ({ userId }) => {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
+  const handlePackageClick = (amount) => {
+    setFormData((prev) => ({ ...prev, amount }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage({ type: "", text: "" });
 
     try {
-      console.log("📤 Sending STK push request:", formData);
-
       const response = await axios.post(
         `${config.API_BASE_URL}/api/transactions/stk/push`,
         formData
@@ -123,22 +124,20 @@ const Subscribe = ({ userId }) => {
 
       const initialMsg =
         response.data.CustomerMessage || "Request accepted. Confirm payment on your phone.";
-      console.log("📬 STK push response:", initialMsg);
+
       setMessage({ type: "info", text: initialMsg });
 
       setFormData((prev) => ({ ...prev, amount: "", phoneNumber: "" }));
     } catch (err) {
       const errorMessage = err.response?.data?.message || `Request error: ${err.message}`;
-      console.error("❌ STK push error:", errorMessage);
       setMessage({ type: "error", text: errorMessage });
       setLoading(false);
     }
   };
 
-  // ✅ NEW CLOSE HANDLER
   const handleCloseAlert = () => {
     if (message.type === "success") {
-      navigate("/"); // redirect only on success
+      navigate("/");
     }
     setMessage({ type: "", text: "" });
   };
@@ -146,18 +145,16 @@ const Subscribe = ({ userId }) => {
   return (
     <div className="container mt-2">
       <div className="row justify-content-center">
-        <div className="col-md-6">
+        <div className="col-md-8">
           <div className="card shadow-sm">
             <div className="card-header bg-primary text-white text-center">
-              <h5>Follow these steps to subscribe</h5>
+              <h5>Follow these steps to Gain Access</h5>
             </div>
             <div className="card-body">
 
 {message.text && (message.type === "success" || message.type === "error") && (
   <div
-    className={`alert alert-${
-      message.type === "error" ? "danger" : "success"
-    } alert-dismissible fade show`}
+    className={`alert alert-${message.type === "error" ? "danger" : "success"} alert-dismissible fade show`}
     role="alert"
   >
     {message.text}
@@ -165,7 +162,7 @@ const Subscribe = ({ userId }) => {
       type="button"
       className="btn-close"
       aria-label="Close"
-      onClick={handleCloseAlert}  // ✅ updated
+      onClick={handleCloseAlert}
     ></button>
   </div>
 )}
@@ -177,6 +174,8 @@ const Subscribe = ({ userId }) => {
 )}
 
               <form onSubmit={handleSubmit}>
+
+                {/* ✅ STEPS (NOT REMOVED) */}
                 <ol className="subscription-steps">
                   <li>Enter the amount</li>
                   <li>Enter your phone number</li>
@@ -184,40 +183,68 @@ const Subscribe = ({ userId }) => {
                   <li>Confirm payment on your phone with your PIN</li>
                 </ol>
 
-                <div className="mb-3">
-                  <label htmlFor="amount" className="form-label">Amount (KES):</label>
-                  <input
-                    type="number"
-                    id="amount"
-                    className="form-control mt-2"
-                    value={formData.amount}
-                    onChange={handleChange}
-                    placeholder="Preferred amount"
-                    min="1"
-                    required
-                  />
-                  <small className="text-muted d-block mt-1">Minimum KES 10</small>
-                </div>
+<div className="row">
 
-                <div className="mb-3">
-                  <label htmlFor="phoneNumber" className="form-label">Phone Number:</label>
-                  <input
-                    type="tel"
-                    id="phoneNumber"
-                    className="form-control"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                    placeholder="07XXXXXXXX"
-                    pattern="^\d{10}$"
-                    required
-                  />
-                </div>
+  {/* LEFT SIDE - PACKAGES */}
+  <div className="col-md-6">
+    <label className="form-label">Quick Packages:</label>
+    <div className="d-grid gap-2">
+      {packages.map((pkg, index) => (
+        <button
+          key={index}
+          type="button"
+          className="btn btn-outline-primary"
+          onClick={() => handlePackageClick(pkg.amount)}
+        >
+          {pkg.label} – KES {pkg.amount}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  {/* RIGHT SIDE - INPUTS */}
+  <div className="col-md-6">
+    <div className="mb-3">
+      <label htmlFor="amount" className="form-label">Amount (KES):</label>
+      <input
+        type="number"
+        id="amount"
+        className="form-control mt-2"
+        value={formData.amount}
+        onChange={handleChange}
+        placeholder="Preferred amount"
+        min="50"
+        required
+      />
+      <small className="text-muted d-block mt-1">
+        Minimum KES 50 for 2 days
+      </small>
+    </div>
+
+    <div className="mb-3">
+      <label htmlFor="phoneNumber" className="form-label">Phone Number:</label>
+      <input
+        type="tel"
+        id="phoneNumber"
+        className="form-control"
+        value={formData.phoneNumber}
+        onChange={handleChange}
+        placeholder="07XXXXXXXX"
+        pattern="^\d{10}$"
+        required
+      />
+    </div>
+  </div>
+
+</div>
+
 
                 <input type="hidden" id="user_id" value={formData.user_id} />
 
-                <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+                <button type="submit" className="btn btn-primary w-100 mt-3" disabled={loading}>
                   {loading ? "Processing..." : "Submit"}
                 </button>
+
               </form>
             </div>
           </div>

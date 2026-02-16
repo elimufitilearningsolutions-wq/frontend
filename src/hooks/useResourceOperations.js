@@ -28,7 +28,7 @@ export const useDownloadHandler = () => {
       );
       const amount = subscriptionResponse.data?.Amount || 0;
       if (amount <= 0)
-        throw new Error('🔓 Unlock downloads with a KSh 10 one-time trial.\n✔ Unlimited access');
+        throw new Error('🔓 Unlock downloads to get.\n✔ Unlimited access');
 
       // Get download link
       const modifiedCategory = category.slice(0, -1); // remove last char

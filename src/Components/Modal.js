@@ -15,13 +15,13 @@ const Modal = ({ show, handleClose, isSubscribed, isLoggedIn, children }) => {
                             {isLoggedIn 
                                 ? isSubscribed 
                                     ? "Action Required" 
-                                    : "🔓 Unlock downloads (KSh 10 trial)" 
+                                    : "🔓 Unlock downloads " 
                                 : "Login Required"}
                         </h5>
                         <button type="button" className="btn-close" onClick={handleClose} aria-label="Close"></button>
                     </div>
                     <div className="modal-body text-black">
-                        {children}
+                                        {children}                                                                                                                                                                                          
 
                         {/* Redirection to either subscribe or login */}
                         <div 
@@ -32,12 +32,12 @@ const Modal = ({ show, handleClose, isSubscribed, isLoggedIn, children }) => {
                             {isLoggedIn 
                                 ? isSubscribed 
                                     ? null 
-                                    : <p>Unlock downloads</p> 
-                                : <p>Login to continue</p>}
+                                    : <button type="button">Unlock downloads</button> 
+                                : <button type="button">Login to continue</button>}
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" onClick={handleClose}>Close</button>
+                        <button type="button" className="btn btn-secondary" onClick={handleClose}>Close</button>                                                                                              
                     </div>
                 </div>
             </div>

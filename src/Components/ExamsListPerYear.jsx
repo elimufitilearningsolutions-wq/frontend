@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import config from '../config';
-const ExamsList = ({ heading, items, navigateTo }) => {
+const ExamsList = ({ heading, items, navigateTo, customBg }) => {
     const [selectedItem, setSelectedItem] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -39,8 +39,20 @@ const ExamsList = ({ heading, items, navigateTo }) => {
     };
 
     return (
-        <div className="bg-opacity" style={{ position: 'relative' }}>
-    <div>
+        <div  className="bg-opacity"
+            style={{
+            position: "relative",
+    backgroundImage: customBg ? customBg : "none",
+    backgroundSize: "cover",          // fills entire screen
+    backgroundPosition: "center",     // keeps image centered
+    backgroundRepeat: "no-repeat",    // no tiling
+    backgroundAttachment: "fixed",    // smooth desktop effect
+    minHeight: "100vh",               // full viewport height
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+            }}>
+        <div>
         <div className="container-fluid" style={{ paddingLeft: '10px', paddingRight: '10px' }}>
             <div className="row">
                 <div className="col-lg-12">
@@ -49,32 +61,48 @@ const ExamsList = ({ heading, items, navigateTo }) => {
                     {loading ? (
                         <div>Loading...</div>
                     ) : (
-                        <div className="d-flex justify-content-center">
-                            <div className="list-group">
-                                {items.map((item, index) => (
-                                    <div key={index} className="list-group-item" style={{
-                                        marginBottom: '20px',
-                                        backgroundColor: item.bgColor,
-                                        border: 'none',
-                                        fontSize: "24px"
-                                    }} onClick={() => handleItemClick(item)}>
-                                        <div style={{
-                                            display: 'inline-block',
-                                            color: item.textColor || '#000000',
-                                            textDecoration: 'underline',
-                                            paddingTop: '20px',
-                                            paddingBottom: '20px',
-                                            overflow: 'hidden',
-                                            whiteSpace: 'nowrap',
-                                            textOverflow: 'ellipsis',
-                                            cursor: 'pointer',
-                                        }}>
-                                            {item.name}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+<div className="d-flex justify-content-center">
+  <div style={{ width: "100%", maxWidth: "600px" }}>
+    {items.map((item, index) => (
+      <div
+        key={index}
+        onClick={() => handleItemClick(item)}
+        style={{
+          marginBottom: "25px",
+          padding: "25px",
+          borderRadius: "16px",
+          backdropFilter: "blur(10px)",
+          background: "rgba(255, 255, 255, 0.15)",
+          border: "1px solid rgba(255,255,255,0.2)",
+          boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
+          transition: "all 0.3s ease",
+          cursor: "pointer",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "translateY(-5px)";
+          e.currentTarget.style.boxShadow = "0 15px 35px rgba(0,0,0,0.25)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "translateY(0)";
+          e.currentTarget.style.boxShadow = "0 8px 25px rgba(0,0,0,0.15)";
+        }}
+      >
+        <div
+          style={{
+            fontSize: "22px",
+            fontWeight: "600",
+            color: item.textColor || "#ffffff",
+            textAlign: "center",
+            letterSpacing: "0.5px",
+          }}
+        >
+          {item.name}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
                     )}
                 </div>
             </div>

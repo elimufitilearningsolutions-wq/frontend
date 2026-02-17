@@ -21,7 +21,7 @@ const Modal = ({ show, handleClose, isSubscribed, isLoggedIn, children }) => {
                         <button type="button" className="btn-close" onClick={handleClose} aria-label="Close"></button>
                     </div>
                     <div className="modal-body text-black">
-                                        {children}                                                                                                                                                                                          
+                                        {/*children*/}                                                                                                                                                                                         
 
                         {/* Redirection to either subscribe or login */}
                         <div 

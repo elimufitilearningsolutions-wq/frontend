@@ -32,8 +32,8 @@ const Modal = ({ show, handleClose, isSubscribed, isLoggedIn, children }) => {
                             {isLoggedIn 
                                 ? isSubscribed 
                                     ? null 
-                                    : <button type="button">Unlock downloads</button> 
-                                : <button type="button">Login to continue</button>}
+                                    : <button className="btn btn-primary px-4 py-2 rounded-pill shadow-sm fw-semibold"  type="button">Unlock downloads</button> 
+                                : <button className="btn btn-primary px-4 py-2 rounded-pill shadow-sm fw-semibold"  type="button">Login to continue</button>}
                         </div>
                     </div>
                     <div className="modal-footer">

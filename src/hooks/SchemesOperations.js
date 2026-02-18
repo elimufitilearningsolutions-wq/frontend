@@ -104,7 +104,7 @@ export const SchemesDownload = ({ isAdmin, isLoggedIn, clearToken, heading, isSu
                                                 width: "100%",
                                                 margin: 0,
                                                 padding: 0,
-                                                gap: "8px",
+                                                gap: "4px",
                                             }}>
                                                 {/* Checkbox for selection */}
                                                 {isAdmin && (
@@ -133,7 +133,7 @@ export const SchemesDownload = ({ isAdmin, isLoggedIn, clearToken, heading, isSu
                                                     style={{
                                                         cursor: "pointer",
                                                         margin: 0,
-                                                        padding: "2px",
+                                                        padding: "6px",
                                                         fontFamily: "Cinzel, serif",
                                                         whiteSpace: "nowrap",
                                                     }}

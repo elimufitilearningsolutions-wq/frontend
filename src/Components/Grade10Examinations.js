@@ -18,4 +18,4 @@ const Grade10Examinations = ({ isLoggedIn, clearToken }) => {
     );
 };
 
-export default Grade10Examinations;
+export default Grade10Examinations

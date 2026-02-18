@@ -87,6 +87,7 @@ const handleClick = (items, value) => {
     case "/jss/schemes":
     case "/jss/lesson/plans":
     case "/senior/school/schemes":
+    case "/grade10/evaluations":
     case "/grade10/examinations":
     case "/senior/school/notes":
     case "/senior/school/lesson/plans":

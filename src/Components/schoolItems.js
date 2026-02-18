@@ -52,7 +52,8 @@ export const jssItems = [
 export const seniorSchoolItems = [
         { label: "SENIOR SCHOOL SCHEMES OF WORK ", value: "/senior/school/schemes",path: "senior" },       
         { label: "SENIOR SCHOOL LESSON PLANS ", value: "/senior/school/lesson/plans",path: "senior" },       
-        { label: "GRADE 10 EXAMINATIONS  ", value: "/grade10/examinations" ,path: "senior"},        
+        { label: "GRADE 10 EMAMINATIONS  ", value: "/grade10/examinations" ,path: "senior"},        
+        { label: "GRADE 10 EVALUATION TEST  ", value: "/grade10/evaluations" ,path: "senior"},        
         { label: "SENIOR SCHOOL CURRICULUM DESIGNS  ", value: "/senior/school/curriculum/designs" ,path: "senior"},
         { label: "SENIOR SCHOOL NOTES  ", value: "/senior/school/notes" ,path: "senior"},        
     

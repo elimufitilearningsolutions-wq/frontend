@@ -78,8 +78,6 @@ import Footer2 from './Components/Footer2';
 import ResourceLinks from './Components/ResourceLinks';
 import Careers from './Components/Careers';
 import DPTENotes from './Components/DPTENotes';
-import Grade10Examinations from './Components/Grade10Examinations';
-import Grade10ExaminationsDownload from './Components/Grade10ExaminationsDownloads';
 import SeniorSchoolSchemes from './Components/SeniorSchoolschemes';
 import SeniorSchoolSchemesDownload from './Components/SeniorSchoolschemesDownload';
 import SeniorSchoolCurriculumDesign from './Components/SeniorSChoolCurriculumDedign';
@@ -107,6 +105,10 @@ import SeniorSchoolLessonPlans from './Components/SeniorSchoolLessonPlans';
 import SeniorSchoolLessonPlanDownloads from './Components/SeniorSchoolLessonPlanDownloads';
 import PrePrimaryTeachingAids from './Components/PrePrimaryTeachingAids';
 import PrePrimaryTeachingAidDownload from "./Components/PrePrimaryTeachingAidDownloads"
+import Grade10evaluations from './Components/Grade10Evaluations';
+import Grade10EvaluationsDownload from './Components/Grade10EvaluationsDownloads';
+import Grade10Examinations from './Components/Grade10Examinations';
+import Grade10ExaminationsDownload from './Components/Grade10ExaminationDownloads';
 
 
 const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIsLoggedIn, setUserId, setShowModal }) => (
@@ -452,6 +454,30 @@ const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIs
         />
 
         {/*SENIOR*/}
+       <Route
+  path="/grade10/evaluations"
+  element={
+    <Grade10evaluations
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+       <Route
+  path="/grade10/evaluations/downloads"
+  element={
+    <Grade10EvaluationsDownload
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
        <Route
   path="/grade10/examinations"
   element={

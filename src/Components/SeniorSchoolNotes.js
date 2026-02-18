@@ -20,22 +20,7 @@ const SeniorSchoolNotes = ({ isLoggedIn, clearToken }) => {
       path: "/senior/school",
       value: "notes",
     },
-    {
-      name: "SENIOR SCHOOL NOTES 2024",
-      year: 2024,
-      bgColor: "rgba(0, 0, 0, 0.2)",
-      textColor: "rgb(0, 0, 0)",
-      path: "/senior/school",
-      value: "notes",
-    },
-    {
-      name: "SENIOR SCHOOL NOTES 2023",
-      year: 2023,
-      bgColor: "rgba(0, 0, 0, 0.1)",
-      textColor: "rgb(0, 0, 0)",
-      path: "/senior/school",
-      value: "notes",
-    },
+    
   ];
 
   return (

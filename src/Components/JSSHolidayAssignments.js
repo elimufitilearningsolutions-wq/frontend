@@ -7,8 +7,7 @@ const JSSHolidayAssignments = ({ isLoggedIn, clearToken }) => {
     const items = [
         { name: 'JUNIOR SCHOOL HOLIDAY ASSIGNMENTS 2026 ', year: 2026, bgColor: 'rgba(0, 0, 0, 0.2)', textColor: 'rgb(0, 0, 0)', path: "jss", value: "holiday/assignments" },
         { name: 'JUNIOR SCHOOL HOLIDAY ASSIGNMENTS 2025 ', year: 2025, bgColor: 'rgba(0, 0, 0, 0.1)', textColor: 'rgb(0, 0, 0)', path: "jss", value: "holiday/assignments" },
-        { name: 'JUNIOR SCHOOL HOLIDAY ASSIGNMENTS 2024 ', year: 2024, bgColor: 'rgba(0, 0, 0, 0.2)', textColor: 'rgb(0, 0, 0)', path: "jss", value: "holiday/assignments" },
-        { name: 'JUNIOR SCHOOL HOLIDAY ASSIGNMENTS 2023 ', year: 2023, bgColor: 'rgba(0, 0, 0, 0.1)', textColor: 'rgb(0, 0, 0)', path: "jss", value: "holiday/assignments" }
+        
     ];
 
     return (

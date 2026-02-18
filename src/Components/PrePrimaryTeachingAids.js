@@ -5,7 +5,7 @@ import ExamsList from './ExamsListPerYear';
 
 const PrePrimaryTeachingAids = ({ isLoggedIn, clearToken }) => {
     const items = [
-        { name: 'PRE-PRIMARY TEACHING AIDS 2026 ', year: 2026, bgColor: 'rgba(0, 0, 0, 0.2)', textColor: '#FFFFFF', path: "pre/primary", value: "teaching/aids" },
+        { name: 'PRE-PRIMARY TEACHING AIDS 2026 ', year: 2026, bgColor: 'rgba(0, 0, 0, 0.2)', textColor: '#1a1a1a', path: "pre/primary", value: "teaching/aids" },
         { name: 'PRE-PRIMARY TEACHING AIDS 2025 ', year: 2025, bgColor: 'rgba(0, 0, 0, 0.1)', textColor: 'rgb(0, 0, 0)', path: "pre/primary", value: "teaching/aids" },
         
     ];

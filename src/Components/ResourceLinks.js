@@ -89,6 +89,7 @@ const handleClick = (items, value) => {
     case "/senior/school/schemes":
     case "/grade10/evaluations":
     case "/grade10/examinations":
+    case "/grade9/examinations":
     case "/senior/school/notes":
     case "/senior/school/lesson/plans":
     case "/senior/school/curriculum/designs":

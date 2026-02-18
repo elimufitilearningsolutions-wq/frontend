@@ -43,6 +43,7 @@ export const jssItems = [
         { label: "JUNIOR SCHOOL ASSESSMENT TOOLS  ", value: "/jss/assessment/tools" ,path: "jss"},
         { label: "GRADE 7 EXAMINATIONS  ", value: "/grade7/examinations" ,path: "jss"},
         { label: "GRADE 8 EXAMINATIONS  ", value: "/grade8/examinations" ,path: "jss"},
+        { label: "GRADE 9 EXAMINATIONS  ", value: "/grade9/examinations" ,path: "jss"},
         { label: "JUNIOR SCHOOL CURRICULUM DESIGNS  ", value: "/jss/curriculum/designs" ,path: "jss"},
         { label: "JUNIOR SCHOOL NOTES  ", value: "/jss/notes" ,path: "jss"},        
         { label: "JUNIOR SCHOOL LESSON PLANS  ", value: "/jss/lesson/plans" ,path: "jss"},        

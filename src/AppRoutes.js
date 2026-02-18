@@ -109,6 +109,8 @@ import Grade10evaluations from './Components/Grade10Evaluations';
 import Grade10EvaluationsDownload from './Components/Grade10EvaluationsDownloads';
 import Grade10Examinations from './Components/Grade10Examinations';
 import Grade10ExaminationsDownload from './Components/Grade10ExaminationDownloads';
+import Grade9Examinations from './Components/Grade9Examinations';
+import Grade9EvaluationsDownloads from './Components/Grade9ExaminationsDownloads';
 
 
 const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIsLoggedIn, setUserId, setShowModal }) => (
@@ -494,6 +496,30 @@ const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIs
   path="/grade10/examinations/downloads"
   element={
     <Grade10ExaminationsDownload
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+       <Route
+  path="/grade9/examinations"
+  element={
+    <Grade9Examinations
+      isAdmin={isAdmin}
+      userId={userId}
+      isLoggedIn={isLoggedIn}
+      clearToken={clearToken}
+      isSubscribed={isSubscribed}
+    />
+  }
+/>
+       <Route
+  path="/grade9/examinations/downloads"
+  element={
+    <Grade9EvaluationsDownloads
       isAdmin={isAdmin}
       userId={userId}
       isLoggedIn={isLoggedIn}

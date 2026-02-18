@@ -32,6 +32,7 @@ const categoryTableMap = {
     "create/grade8/exam": "grade8_exams",
     "create/grade9/exam": "grade9_exams",
     "create/grade10/exams": "grade10_exams",
+    "create/grade9/examinations": "grade9_examinations",
     "create/grade10/evaluations": "grade10_evaluations",
     "create/assessment/tools": "assessment_tools",
     "create/holiday/assignments": "holiday_assignments",

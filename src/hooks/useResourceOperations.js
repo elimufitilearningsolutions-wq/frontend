@@ -15,9 +15,55 @@ const PREVIEW_EXTENSIONS = [
   "xlsx",
 ];
 
-/**
- * Hook to handle file preview (responsive full-page branded tab) + direct download
- */
+// ────────────────────────────────────────────────────────────────
+// Shared mapping: category string → real database table name
+// Update this list with ALL categories your app uses
+// ────────────────────────────────────────────────────────────────
+
+const CATEGORY_TABLE_MAP = {
+  "schemes":                  "schemes",
+  "teaching/aids":          "teaching_aids",
+  "lesson/plans":           "lesson_plans",
+  "notes":                    "notes",
+  "play/group/colouring": "playgroup_exams",
+  "curriculum/designs":     "curriculum_designs",
+  "grade7/examinations":    "grade7_examinations",
+  "grade8/examinations":    "grade8_examinations",
+  "fullset/examinations":   "fullset_examinations",
+  "kcse/past/papers":       "ksce_past_papers",
+  "kcse/trial/examinations": "kcse_trial_examinations",
+  "revision/notes":         "revision_notes",
+  "play/group/exams":       "playgroup_exams",
+  "coluring/pages":         "colouring_pages",
+  "pp1/exams":              "pp1_exams",
+  "pp2/exams":              "pp2_exams",
+  "grade1/exam":            "grade1_exams",
+  "grade1/examinations":    "grade1_exams",     
+  "grade2/exam":            "grade2_exams",
+  "grade3/exam":            "grade3_exams",
+  "grade4/exam":            "grade4_exams",
+  "grade5/exam":            "grade5_exams",
+  "grade6/exam":            "grade6_exams",
+  "grade7/exam":            "grade7_exams",
+  "grade8/exam":            "grade8_exams",
+  "grade10/exams":          "grade10_exams",
+  "grade9/examinations":    "grade9_examinations",
+  "grade10/evaluations":    "grade10_evaluations",
+  "assessment/tools":       "assessment_tools",
+  "holiday/assignments":    "holiday_assignments",
+  "cpanotes":                 "cpanotes",
+  "dptenotes":                "dptenotes",
+  "ecdnotes":                 "ecdnotes",
+  "diplomanotes":             "diplomanotes",
+
+  // Fallback when no match is found (should rarely happen)
+  default:                  "exams",
+};
+
+// ────────────────────────────────────────────────────────────────
+// Hook: File download & preview
+// ────────────────────────────────────────────────────────────────
+
 export const useDownloadHandler = () => {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -46,6 +92,7 @@ export const useDownloadHandler = () => {
       }
 
       // 2. Get download link
+      // Remove last character (common pattern in your original code)
       const modifiedCategory = category.slice(0, -1);
       const { data } = await axios.get(
         `${apiUrl}/${path}/${modifiedCategory}/file/${id}`,
@@ -60,7 +107,7 @@ export const useDownloadHandler = () => {
       const name = fileName || data.filename || "downloaded-file";
       const ext = (name.split(".").pop() || "").toLowerCase();
 
-      // 3. Decide action
+      // 3. Preview or direct download
       if (PREVIEW_EXTENSIONS.includes(ext)) {
         openResponsivePreviewTab(url, name, ext);
       } else {
@@ -82,28 +129,19 @@ export const useDownloadHandler = () => {
     }
   };
 
-  /**
-   * Opens preview in a normal browser tab — fully responsive, full-page content
-   */
   const openResponsivePreviewTab = (url, name, ext) => {
     const lowerExt = ext.toLowerCase();
     const isOffice = ["docx", "doc", "pptx", "xlsx"].includes(lowerExt);
     const isPdf = lowerExt === "pdf";
     const isImage = ["jpg", "jpeg", "png", "gif"].includes(lowerExt);
 
-    // Microsoft Office viewer for Office files (cleaner & more reliable)
     const viewerUrl = isOffice
       ? `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}`
       : url;
 
     const tab = window.open("", "_blank");
-
     if (!tab || tab.closed || typeof tab.closed === "undefined") {
-      alert(
-        "Could not open Elimufiti preview.\n\n" +
-        "Your browser may be blocking new tabs.\n" +
-        "Please allow popups/new tabs for this site."
-      );
+      alert("Could not open preview.\nPlease allow popups for this site.");
       return;
     }
 
@@ -122,20 +160,15 @@ export const useDownloadHandler = () => {
         <title>Elimufiti | ${name}</title>
         <style>
           * { margin:0; padding:0; box-sizing:border-box; }
-          html, body {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-          }
+          html, body { height:100%; width:100%; overflow:hidden; }
           body {
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: system-ui, sans-serif;
             background: #f9fafb;
             display: flex;
             flex-direction: column;
-            touch-action: manipulation;
           }
           header {
-            background: linear-gradient(135deg, #0d6efd 0%, #0056d2 100%);
+            background: linear-gradient(135deg, #0d6efd, #0056d2);
             color: white;
             padding: clamp(0.8rem, 2.5vw, 1rem) clamp(1rem, 3vw, 1.5rem);
             display: flex;
@@ -148,11 +181,7 @@ export const useDownloadHandler = () => {
             z-index: 1000;
             flex-wrap: wrap;
           }
-          .brand {
-            font-size: clamp(1.1rem, 4.2vw, 1.35rem);
-            font-weight: 700;
-            white-space: nowrap;
-          }
+          .brand { font-size: clamp(1.1rem, 4.2vw, 1.35rem); font-weight: 700; }
           .filename {
             font-size: clamp(0.95rem, 3.8vw, 1.1rem);
             max-width: 50%;
@@ -162,11 +191,7 @@ export const useDownloadHandler = () => {
             opacity: 0.95;
             flex: 1;
           }
-          .actions {
-            display: flex;
-            gap: clamp(0.6rem, 2vw, 0.8rem);
-            flex-shrink: 0;
-          }
+          .actions { display: flex; gap: clamp(0.6rem, 2vw, 0.8rem); flex-shrink: 0; }
           .actions button {
             background: rgba(255,255,255,0.97);
             color: #0d6efd;
@@ -177,7 +202,6 @@ export const useDownloadHandler = () => {
             font-weight: 600;
             cursor: pointer;
             transition: all 0.18s ease;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
             min-width: 90px;
           }
           .actions button:hover {
@@ -199,9 +223,7 @@ export const useDownloadHandler = () => {
             height: 100%;
             border: none;
           }
-          img {
-            object-fit: contain;
-          }
+          img { object-fit: contain; }
           .fallback {
             position: absolute;
             inset: 0;
@@ -211,44 +233,15 @@ export const useDownloadHandler = () => {
             align-items: center;
             background: #f1f5f9;
             color: #475569;
-            font-size: clamp(1.1rem, 4vw, 1.25rem);
             text-align: center;
             padding: 2rem;
           }
-          .fallback a {
-            color: #0d6efd;
-            text-decoration: underline;
-            margin-top: 1rem;
-            font-weight: 500;
-          }
-
-          /* Mobile optimizations */
+          .fallback a { color: #0d6efd; text-decoration: underline; margin-top: 1rem; font-weight: 500; }
           @media (max-width: 768px) {
-            header {
-              padding: 0.8rem 1rem;
-              flex-direction: column;
-              align-items: flex-start;
-              gap: 0.8rem;
-            }
-            .brand, .filename {
-              max-width: 100%;
-              text-align: left;
-            }
-            .actions {
-              width: 100%;
-              justify-content: space-between;
-              gap: 0.6rem;
-            }
-            .actions button {
-              flex: 1;
-              padding: 0.75rem 1rem;
-              font-size: 0.95rem;
-            }
-          }
-          @media (max-width: 480px) {
-            .brand { font-size: 1.1rem; }
-            .filename { font-size: 0.95rem; }
-            .actions button { padding: 0.7rem 0.9rem; font-size: 0.9rem; }
+            header { flex-direction: column; align-items: flex-start; gap: 0.8rem; padding: 0.8rem 1rem; }
+            .brand, .filename { max-width: 100%; }
+            .actions { width: 100%; justify-content: space-between; }
+            .actions button { flex: 1; padding: 0.75rem 1rem; font-size: 0.95rem; }
           }
         </style>
       </head>
@@ -257,30 +250,18 @@ export const useDownloadHandler = () => {
           <div class="brand">Elimufiti</div>
           <div class="filename">${name}</div>
           <div class="actions">
-            <button onclick="window.open('${url}', '_blank')" title="Download file">
-              Download
-            </button>
-            <button 
-              onclick="navigator.clipboard.writeText('${url}').then(() => alert('Link copied!'))"
-              title="Copy shareable link"
-            >
-              Share
-            </button>
+            <button onclick="window.open('${url}', '_blank')">Download</button>
+            <button onclick="navigator.clipboard.writeText('${url}').then(() => alert('Link copied!'))">Share</button>
           </div>
         </header>
-
         <div class="preview-area">
-          ${
-            isPdf
-              ? `<embed src="${url}" type="application/pdf">`
-              : isImage
-              ? `<img src="${url}" alt="${name}">`
-              : isOffice
-              ? `<iframe src="${viewerUrl}" allowfullscreen></iframe>`
-              : `<div class="fallback">
-                   <p>Preview not available for this file type</p>
-                   <a href="${url}" target="_blank">Click here to download</a>
-                 </div>`
+          ${isPdf ? `<embed src="${url}" type="application/pdf">` :
+            isImage ? `<img src="${url}" alt="${name}">` :
+            isOffice ? `<iframe src="${viewerUrl}" allowfullscreen></iframe>` :
+            `<div class="fallback">
+               <p>Preview not available for this file type</p>
+               <a href="${url}" target="_blank">Click here to download</a>
+             </div>`
           }
         </div>
       </body>
@@ -289,9 +270,6 @@ export const useDownloadHandler = () => {
     doc.close();
   };
 
-  /**
-   * Triggers direct browser-native download
-   */
   const triggerDirectDownload = (url, name) => {
     const link = document.createElement("a");
     link.href = url;
@@ -314,47 +292,98 @@ export const useDownloadHandler = () => {
   };
 };
 
-/**
- * Hook for bulk delete operations
- */
+// ────────────────────────────────────────────────────────────────
+// Hook: Bulk delete with category → table mapping
+// ────────────────────────────────────────────────────────────────
+
 export const useDeleteHandler = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
-  const handleDeleteExam = async ({ path, table, ids }) => {
+  const handleDeleteExam = async ({ path, table: category, ids }) => {
+    if (!Array.isArray(ids) || ids.length === 0) {
+      console.warn("Bulk delete called with no valid IDs");
+      return;
+    }
+
+    setIsDeleting(true);
+    setErrorMessage("");
+
     try {
-      if (!ids || ids.length === 0) return;
-
       const apiUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000";
 
+      // ── 1. Resolve schema ────────────────────────────────────────
+      const pathParts = path.split("/").filter(Boolean);
+      let schemaKey = pathParts[0]?.toLowerCase() || "";
+
+      // Special case: pre/primary → preprimary
+      if (pathParts.length >= 2 && pathParts[0].toLowerCase() === "pre" && pathParts[1].toLowerCase() === "primary") {
+        schemaKey = "preprimary";
+      }
+
       const schemaMap = {
-        primary: "elimufi1_primaryschool",
-        secondary: "elimufi1_secondaryschool",
-        jss: "elimufi1_jss",
+        primary:    "elimufi1_primaryschool",
+        secondary:  "elimufi1_secondaryschool",
+        jss:        "elimufi1_jss",
         preprimary: "elimufi1_preprimary",
-        senior: "elimufi1_senior",
-        college: "elimufi1_college",
-        users: "elimufi1_users",
+        senior:     "elimufi1_senior",
+        college:    "elimufi1_college",
+        users:      "elimufi1_users",
       };
 
-      const normalizedPath = path.replace(/\//g, "").toLowerCase();
-      const schema = schemaMap[normalizedPath];
+      const schema = schemaMap[schemaKey];
+      if (!schema) {
+        throw new Error(`Cannot determine schema from path: "${path}"`);
+      }
 
-      if (!schema) throw new Error(`Invalid path: ${path}`);
+      // ── 2. Resolve table (category → real table name) ────────────
+      let safeTable = CATEGORY_TABLE_MAP[category];
 
-      const url = `${apiUrl}/${path}/${table}/bulk`;
+      // Optional: handle common variations
+      if (!safeTable && category.includes("examinations")) {
+        const examVersion = category.replace("examinations", "exam");
+        safeTable = CATEGORY_TABLE_MAP[examVersion];
+      }
 
-      const response = await axios.post(url, { schema, table, ids });
+      safeTable = safeTable || CATEGORY_TABLE_MAP.default || "exams";
+
+      console.log("[Delete Request]", {
+        path,
+        categorySent: category,
+        tableUsed: safeTable,
+        schema,
+        idsCount: ids.length
+      });
+
+      // ── 3. Send to backend ───────────────────────────────────────
+      const response = await axios.post(
+        `${apiUrl}/${path}/${category}/bulk`,
+        {
+          schema,
+          table: safeTable,
+          ids,
+        },
+        { timeout: 30000 }
+      );
 
       if (response.status !== 200) {
-        throw new Error(`Unexpected response status: ${response.status}`);
+        throw new Error(`Server returned status ${response.status}`);
       }
 
       setShowDeleteModal(false);
       setErrorMessage("");
-    } catch (error) {
-      setErrorMessage(error.message || "Failed to delete items");
-      console.error("Bulk delete error:", error);
+    } catch (err) {
+      const msg =
+        err.response?.data?.error ||
+        err.response?.data?.message ||
+        err.message ||
+        "Failed to delete resources";
+
+      setErrorMessage(msg);
+      console.error("[Bulk Delete Failed]", err);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -368,6 +397,7 @@ export const useDeleteHandler = () => {
     showDeleteModal,
     setShowDeleteModal,
     errorMessage,
+    isDeleting,
     closeDeleteModal,
   };
 };

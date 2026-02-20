@@ -16,6 +16,9 @@ const ExamsList = ({ heading, items, navigateTo, customBg }) => {
            //http://localhost:8000/pre/primary/pp2/exams/2024
             const url = `${apiUrl}/${path}/${value}/${year}`;
             console.log('the fetched url is:', url)
+            console.log("api url", apiUrl)
+            console.log("path", path)
+            console.log("value", value)
 
             const res = await axios.get(url);
         

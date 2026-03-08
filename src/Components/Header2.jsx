@@ -154,7 +154,7 @@ const Header2 = ({ isAdmin, isLoggedIn, clearToken }) => {
               className="btn btn-sm text-light p-0"
               onClick={clearToken}
             >
-              <i class="bi bi-power"></i>
+              <i class="bi bi-power text-danger fs-5"></i>
             </button>
           </>
         )}

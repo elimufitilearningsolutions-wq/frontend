@@ -152,26 +152,26 @@ const Subscribe = ({ userId }) => {
             </div>
             <div className="card-body">
 
-{message.text && (message.type === "success" || message.type === "error") && (
-  <div
-    className={`alert alert-${message.type === "error" ? "danger" : "success"} alert-dismissible fade show`}
-    role="alert"
-  >
-    {message.text}
-    <button
-      type="button"
-      className="btn-close"
-      aria-label="Close"
-      onClick={handleCloseAlert}
-    ></button>
-  </div>
-)}
+              {message.text && (message.type === "success" || message.type === "error") && (
+                <div
+                  className={`alert alert-${message.type === "error" ? "danger" : "success"} alert-dismissible fade show`}
+                  role="alert"
+                >
+                  {message.text}
+                  <button
+                    type="button"
+                    className="btn-close"
+                    aria-label="Close"
+                    onClick={handleCloseAlert}
+                  ></button>
+                </div>
+              )}
 
-{message.text && message.type === "info" && (
-  <div className="alert alert-info" role="alert">
-    {message.text}
-  </div>
-)}
+              {message.text && message.type === "info" && (
+                <div className="alert alert-info" role="alert">
+                  {message.text}
+                </div>
+              )}
 
               <form onSubmit={handleSubmit}>
 
@@ -183,60 +183,60 @@ const Subscribe = ({ userId }) => {
                   <li>Confirm payment on your phone with your PIN</li>
                 </ol>
 
-<div className="row">
+                <div className="row">
 
-  {/* LEFT SIDE - PACKAGES */}
-  <div className="col-md-6">
-    <label className="form-label">Quick Packages:</label>
-    <div className="d-grid gap-2">
-      {packages.map((pkg, index) => (
-        <button
-          key={index}
-          type="button"
-          className="btn btn-outline-primary"
-          onClick={() => handlePackageClick(pkg.amount)}
-        >
-          {pkg.label} – KES {pkg.amount}
-        </button>
-      ))}
-    </div>
-  </div>
+                  {/* LEFT SIDE - PACKAGES */}
+                  <div className="col-md-6">
+                    <label className="form-label">Quick Packages:</label>
+                    <div className="d-grid gap-2">
+                      {packages.map((pkg, index) => (
+                        <button
+                          key={index}
+                          type="button"
+                          className="btn btn-outline-primary"
+                          onClick={() => handlePackageClick(pkg.amount)}
+                        >
+                          {pkg.label} – KES {pkg.amount}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-  {/* RIGHT SIDE - INPUTS */}
-  <div className="col-md-6">
-    <div className="mb-3">
-      <label htmlFor="amount" className="form-label">Amount (KES):</label>
-      <input
-        type="number"
-        id="amount"
-        className="form-control mt-2"
-        value={formData.amount}
-        onChange={handleChange}
-        placeholder="Preferred amount"
-        min="50"
-        required
-      />
-      <small className="text-muted d-block mt-1">
-        Minimum KES 50 for 2 days
-      </small>
-    </div>
+                  {/* RIGHT SIDE - INPUTS */}
+                  <div className="col-md-6">
+                    <div className="mb-3">
+                      <label htmlFor="amount" className="form-label">Amount (KES):</label>
+                      <input
+                        type="number"
+                        id="amount"
+                        className="form-control mt-2"
+                        value={formData.amount}
+                        onChange={handleChange}
+                        placeholder="Preferred amount"
+                        min="1"
+                        required
+                      />
+                      <small className="text-muted d-block mt-1">
+                        Minimum KES 50 for 2 days
+                      </small>
+                    </div>
 
-    <div className="mb-3">
-      <label htmlFor="phoneNumber" className="form-label">Phone Number:</label>
-      <input
-        type="tel"
-        id="phoneNumber"
-        className="form-control"
-        value={formData.phoneNumber}
-        onChange={handleChange}
-        placeholder="07XXXXXXXX"
-        pattern="^\d{10}$"
-        required
-      />
-    </div>
-  </div>
+                    <div className="mb-3">
+                      <label htmlFor="phoneNumber" className="form-label">Phone Number:</label>
+                      <input
+                        type="tel"
+                        id="phoneNumber"
+                        className="form-control"
+                        value={formData.phoneNumber}
+                        onChange={handleChange}
+                        placeholder="07XXXXXXXX"
+                        pattern="^\d{10}$"
+                        required
+                      />
+                    </div>
+                  </div>
 
-</div>
+                </div>
 
 
                 <input type="hidden" id="user_id" value={formData.user_id} />

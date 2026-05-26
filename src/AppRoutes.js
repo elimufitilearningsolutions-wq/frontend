@@ -111,6 +111,7 @@ import Grade10Examinations from './Components/Grade10Examinations';
 import Grade10ExaminationsDownload from './Components/Grade10ExaminationDownloads';
 import Grade9Examinations from './Components/Grade9Examinations';
 import Grade9EvaluationsDownloads from './Components/Grade9ExaminationsDownloads';
+import UnlockDownloadsModal from './Components/UnlockDownloadsModal';
 
 
 const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIsLoggedIn, setUserId, setShowModal }) => (
@@ -156,6 +157,7 @@ const AppRoutes = ({isAdmin, isSubscribed, isLoggedIn, userId, clearToken, setIs
         <Route path='/login' element={<Login isSubscribed={isSubscribed} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUserId={setUserId} />} />
         <Route path='/signup' element={<Signup isSubscribed={isSubscribed} isLoggedIn={isLoggedIn} />} />     
         <Route path='/subscription' element={<Subscribe userId={userId} />} />       
+        <Route path='/unlock/download' element={<UnlockDownloadsModal userId={userId} />} />       
         <Route 
         path="/play/group/exams" 
         element={<PlayGroup isAdmin={isAdmin} userId={userId} isLoggedIn={isLoggedIn} clearToken={clearToken} isSubscribed={isSubscribed} />}

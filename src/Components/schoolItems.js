@@ -27,13 +27,14 @@
         { label: "PRIMARY LESSON PLANS", value: "/primary/lesson/plans",path: "primary" },
         { label: "PRIMARY CURRICULUM DESIGNS", value: "/primary/curriculum/designs" ,path: "primary"},
         { label: "PRIMARY ASSESSMENT TOOLS ", value: "/primary/assessment/tools" ,path: "primary"},
-        { label: "PRIMARY REVISION NOTES ", value: "/primary/revision/notes" ,path: "primary"},
+        
         { label: "GRADE 1 EXAMINATIONS ", value: "/grade1/examinations" ,path: "primary"},
         { label: "GRADE 2 EXAMINATIONS ", value: "/grade2/examinations" ,path: "primary"},
         { label: "GRADE 3 EXAMINATIONS ", value: "/grade3/examinations" ,path: "primary"},
         { label: "GRADE 4 EXAMINATIONS  ", value: "/grade4/examinations" ,path: "primary"},
         { label: "GRADE 5 EXAMINATIONS  ", value: "/grade5/examinations" ,path: "primary"},
         { label: "GRADE 6 EXAMINATIONS  ", value: "/grade6/examinations" ,path: "primary"},
+        { label: "PRIMARY SCHOOL NOTES  ", value: "/primary/revision/notes" ,path: "primary"},
         { label: "PRIMARY HOLIDAY ASSIGNMENTS   ", value: "/primary/holiday/assignments" ,path: "primary"},
         
     ]

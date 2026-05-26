@@ -1,97 +1,216 @@
-/* Custom CSS for changing the color of the Bootstrap Icons toggle icon */
-.dropdown-toggle::after {
-    color: #fff; /* Change this to your desired color */
-  }
-  /* Remove border-radius from dropdown menu */
-.dropdown-menu {
-    border-radius: 0 !important;
-    background-color: #fff !important;
-}
-.dropdown-menu-li {
-    border: 1px #ffffff !important;
-    
+.header2{
+    background:#002b6b;
+    position:sticky;
+    top:0;
+    z-index:9999;
+    width:100%;
+    min-height:70px;
 }
 
-/* Optional: Remove border-radius from dropdown items (li elements) */
-.dropdown-item {
-    border-radius: 0 !important;
-    border-top: 1px #ffff !important;
-    gap: 1px;
+.navbar{
+    padding:8px 0;
 }
-.header2-container {
-    background-color: #004170;
+
+/* LOGO */
+
+.brand-logo{
+    width:42px;
+    height:42px;
+    object-fit:contain;
 }
-.vertical-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 600px;
-    height: fit-content;
-    
-    background-color: #004170;
-    color: white;
-    z-index: 1000;
-    transform: translateX(0);
-    transition: transform 0.3s ease-in-out;
-    padding: 20px;
-  }
-  
-  
-  
-  .vertical-nav .nav-link {
-    color: white;
-    padding: 10px 0;
-    display: block;
-  }
-  .vertical-nav-container {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-  }
-  
-  .vertical-nav-container.visible {
-    max-height: 500px; /* Set a height large enough to contain the nav */
-  }
-  
-  .vertical-nav-container.hidden {
-    max-height: 0;
-  }
-  
-  /* Optional: Add a smooth opacity transition */
-  .vertical-nav-container {
-    opacity: 0;
-    transition: opacity 0.3s ease-out, max-height 0.3s ease-out;
-  }
-  
-  .vertical-nav-container.visible {
-    opacity: 1;
-    max-height: 500px;
-  }
-  
-  .vertical-nav-container.hidden {
-    opacity: 0;
-    max-height: 0;
-  }
-  .header2-container {
-    position: sticky; /* or use fixed if you want it always visible even when not scrolled */
-    top: 0;
-    z-index: 1000; /* Ensure it's above other content */
-    background-color: #004170; /* Use a background color to prevent transparency issues */
-    width: 100%;
-  }
-.logout {
-list-style: none ;
-text-decoration: none;
-}  
-.logout a{
-color: #ffffff;
-text-decoration: none;
-}  
-.logout a:hover{
-  color: rgb(20, 20, 20);
+
+.brand-name{
+    margin:0;
+    color:#fff;
+    font-size:1.7rem;
+    line-height:1;
+    font-weight:700;
+}
+
+.brand-sub{
+    color:white;
+    opacity:.9;
+    font-size:.72rem;
 }
 
 
+/* NAV */
+
+.navbar-nav{
+    gap:15px;
+}
+
+.nav-link{
+    color:white !important;
+    font-size:.95rem;
+    font-weight:500;
+    transition:.3s;
+}
+
+.nav-link:hover{
+    opacity:.8;
+}
 
 
+/* DROPDOWN */
 
+.dropdown-menu{
+    border:none;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+
+.dropdown-item{
+    padding:10px 15px;
+}
+
+
+/* PARTNER PILL */
+
+.partner-pill{
+
+    border:1px solid rgba(255,255,255,.25);
+
+    border-radius:16px;
+
+    padding:8px 16px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:rgba(255,255,255,.05);
+
+}
+
+.partner-text{
+    color:white;
+    font-size:.85rem;
+}
+
+.everest-logo{
+    width:120px;
+    object-fit:contain;
+}
+
+
+/* POWER BUTTON */
+
+.power-btn{
+
+    width:40px;
+    height:40px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:transparent;
+
+    color:#ff3b30;
+
+    font-size:1.3rem;
+
+}
+
+.power-btn:hover{
+
+    background:rgba(255,255,255,.08);
+
+}
+
+.username{
+    color:white;
+    font-weight:600;
+}
+
+
+/* MOBILE */
+
+@media(max-width:992px){
+
+    .navbar-nav{
+
+        margin-top:15px;
+        gap:5px;
+    }
+
+    .partner-pill{
+
+        margin-top:20px;
+        width:100%;
+        justify-content:center;
+    }
+
+}
+.signin-btn{
+    text-decoration:none !important;
+
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+    color:#fff;
+
+    padding:10px 22px;
+    border:none;
+    border-radius:12px;
+
+    font-size:12px;
+    font-weight:600;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+    transition:all .25s ease;
+
+   
+}
+
+.signin-btn:hover{
+    transform:translateY(-2px);
+
+    background:linear-gradient(135deg,#4f8dfd,#2d6df6);
+
+    box-shadow:
+        0 8px 18px rgba(59,130,246,.3);
+}
+
+.signin-btn:active{
+    transform:scale(.97);
+}
+
+.signin-btn:focus,
+.signin-btn:visited{
+    color:#fff;
+    text-decoration:none;
+}
+
+@media(max-width:992px){
+
+    .navbar-nav{
+        margin-top:15px;
+        gap:5px;
+    }
+
+    .partner-pill{
+        margin-top:20px;
+        width:100%;
+        justify-content:center;
+    }
+
+    .signin-btn{
+        padding:8px 16px;
+        font-size:12px;
+        border-radius:10px;
+
+        white-space:nowrap;   /* prevents Sign In wrapping */
+        min-width:auto;
+        width:auto;
+
+        box-shadow:
+            0 3px 8px rgba(59,130,246,.18);
+    }
+}

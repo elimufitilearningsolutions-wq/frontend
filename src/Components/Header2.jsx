@@ -1,17 +1,31 @@
 import React, { useEffect, useState } from "react";
 import logo from "../images/logo.png";
-import "../assets/header2.css";
+import everestLogo from "../images/everest.png";
 import { jwtDecode } from "jwt-decode";
+import "../assets/header2.css";
 
-const Header2 = ({ isAdmin, isLoggedIn, clearToken }) => {
-  const [userName, setUserName] = useState("");
+const Header2 = ({
+  isAdmin,
+  isLoggedIn,
+  clearToken
+}) => {
+
+  const [userName, setUserName] =
+    useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
+
+    const token =
+      localStorage.getItem(
+        "accessToken"
+      );
+
     if (!token) return;
 
     try {
-      const decoded = jwtDecode(token);
+
+      const decoded =
+        jwtDecode(token);
 
       const name =
         decoded?.name ||
@@ -20,149 +34,476 @@ const Header2 = ({ isAdmin, isLoggedIn, clearToken }) => {
         "";
 
       setUserName(name);
-    } catch (err) {
-      console.error("JWT decode error:", err);
+
     }
+    catch (err) {
+
+      console.error(
+        "JWT Decode Error:",
+        err
+      );
+
+    }
+
   }, []);
 
   return (
-    <div className="header2-container container-fluid text-white px-2 py-2 d-flex align-items-center justify-content-between">
 
-      {/* LEFT NAV */}
-      <nav>
-        <ul className="nav align-items-center">
+    <header className="header2 shadow-sm">
 
-          {/* LOGO */}
-          <li className="nav-item">
+      <nav
+        className="
+        navbar
+        navbar-expand-lg
+        navbar-dark
+        "
+      >
+
+        <div
+          className="
+          container-fluid
+          px-lg-3
+          "
+        >
+
+          {/* ======================
+              LEFT LOGO
+          ====================== */}
+
+          <a
+            className="
+            navbar-brand
+            d-flex
+            align-items-center
+            "
+            href="/"
+          >
+
             <img
               src={logo}
-              alt="Elimufiti logo"
-              style={{ width: 60, height: 60, borderRadius: "50%" }}
+              alt="logo"
+              className="brand-logo"
             />
-          </li>
 
-          <li className="nav-item">
-            <a className="nav-link text-white" href="/subscription">
-              Unlock Resources
-            </a>
-          </li>
+            <div className="ms-2">
 
-          {/* SOLUTIONS */}
-          <li className="nav-item dropdown d-none d-md-block">
-            <button
-              className="nav-link dropdown-toggle btn btn-link text-white"
-              data-bs-toggle="dropdown"
+              <h4 className="brand-name">
+                ELIMUFITI
+              </h4>
+
+              <span className="brand-sub">
+                Learning Solutions
+              </span>
+
+            </div>
+
+          </a>
+
+
+          {/* ======================
+              MOBILE TOGGLE
+          ====================== */}
+
+          <button
+            className="
+            navbar-toggler
+            border-0
+            "
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNav"
+          >
+
+            <span className="navbar-toggler-icon"></span>
+
+          </button>
+
+
+          <div
+            className="
+            collapse
+            navbar-collapse
+            "
+            id="mainNav"
+          >
+
+            {/* ======================
+                NAV LINKS
+            ====================== */}
+
+            <ul
+              className="
+              navbar-nav
+              mx-auto
+              align-items-lg-center
+              "
             >
-              Solutions
-            </button>
 
-            <ul className="dropdown-menu mt-2">
-              <li><a className="dropdown-item" href="#solution1">Solution 1</a></li>
-              <li><a className="dropdown-item" href="#solution2">Solution 2</a></li>
-              <li><a className="dropdown-item" href="#solution3">Solution 3</a></li>
-            </ul>
-          </li>
+              {/* Unlock */}
 
-          {/* HUB */}
-          <li className="nav-item dropdown">
-            <button
-              className="nav-link dropdown-toggle btn btn-link text-white"
-              data-bs-toggle="dropdown"
-            >
-              Hub
-            </button>
+              <li className="nav-item">
 
-            <ul className="dropdown-menu mt-2">
-              <li>
-                <a className="dropdown-item" href="/school/resources">
-                  School Resources
+                <a
+                  href="/subscription"
+                  className="nav-link"
+                >
+
+                  Unlock Resources
+
                 </a>
+
               </li>
 
-              <li>
-                <a className="dropdown-item" href="/careers">
-                  Job Opportunities
+
+              {/* Solutions */}
+
+              <li
+                className="
+                nav-item
+                dropdown
+                "
+              >
+
+                <a
+                  className="
+                  nav-link
+                  dropdown-toggle
+                  "
+                  data-bs-toggle="dropdown"
+                  href="/"
+                >
+
+                  Solutions
+
                 </a>
+
+                <ul className="dropdown-menu">
+
+                  <li>
+
+                    <a
+                      className="dropdown-item"
+                      href="#solution1"
+                    >
+
+                      Solution 1
+
+                    </a>
+
+                  </li>
+
+                  <li>
+
+                    <a
+                      className="dropdown-item"
+                      href="#solution2"
+                    >
+
+                      Solution 2
+
+                    </a>
+
+                  </li>
+
+                  <li>
+
+                    <a
+                      className="dropdown-item"
+                      href="#solution3"
+                    >
+
+                      Solution 3
+
+                    </a>
+
+                  </li>
+
+                </ul>
+
               </li>
 
-              <li>
-                <a className="dropdown-item" href={isAdmin ? "/support" : "/"}>
-                  Support
+
+              {/* Hub */}
+
+              <li
+                className="
+                nav-item
+                dropdown
+                "
+              >
+
+                <a
+                  className="
+                  nav-link
+                  dropdown-toggle
+                  "
+                  data-bs-toggle="dropdown"
+                  href="/"
+                >
+
+                  Hub
+
                 </a>
+
+                <ul className="dropdown-menu">
+
+                  <li>
+
+                    <a
+                      className="dropdown-item"
+                      href="/school/resources"
+                    >
+
+                      School Resources
+
+                    </a>
+
+                  </li>
+
+                  <li>
+
+                    <a
+                      className="dropdown-item"
+                      href="/careers"
+                    >
+
+                      Job Opportunities
+
+                    </a>
+
+                  </li>
+
+                  <li>
+
+                    <a
+                      className="dropdown-item"
+                      href={
+                        isAdmin
+                        ? "/support"
+                        : "/"
+                      }
+                    >
+
+                      Support
+
+                    </a>
+
+                  </li>
+
+                </ul>
+
               </li>
-            </ul>
-          </li>
 
-          {/* ABOUT */}
-          <li className="nav-item dropdown d-none d-md-block">
-            <button
-              className="nav-link dropdown-toggle btn btn-link text-white"
-              data-bs-toggle="dropdown"
+
+              {/* About */}
+
+              <li
+                className="
+                nav-item
+                dropdown
+                "
+              >
+
+                <a
+                  className="
+                  nav-link
+                  dropdown-toggle
+                  "
+                  data-bs-toggle="dropdown"
+                  href="/"
+                >
+
+                  About
+
+                </a>
+
+                <ul className="dropdown-menu">
+
+                  <li>
+
+                    <a
+                      className="dropdown-item"
+                      href="#team"
+                    >
+
+                      Our Team
+
+                    </a>
+
+                  </li>
+
+                  <li>
+
+                    <a
+                      className="dropdown-item"
+                      href="#mission"
+                    >
+
+                      Our Mission
+
+                    </a>
+
+                  </li>
+
+                  <li>
+
+                    <a
+                      className="dropdown-item"
+                      href="#values"
+                    >
+
+                      Our Values
+
+                    </a>
+
+                  </li>
+
+                </ul>
+
+              </li>
+
+
+              {/* Contact */}
+
+              <li
+                className="
+                nav-item
+                dropdown
+                "
+              >
+
+                <a
+                  className="
+                  nav-link
+                  dropdown-toggle
+                  "
+                  data-bs-toggle="dropdown"
+                  href="/"
+                >
+
+                  Contact us
+
+                </a>
+
+                <ul className="dropdown-menu">
+
+                  <li className="dropdown-item">
+
+                    Tel:
+                    0716 880 637
+
+                  </li>
+
+                  <li className="dropdown-item">
+
+                    Email:
+                    info@elimufiti.co.ke
+
+                  </li>
+
+                </ul>
+
+              </li>
+
+            </ul>
+
+
+            {/* ======================
+                RIGHT SIDE
+            ====================== */}
+
+            <div
+              className="
+              d-flex
+              align-items-center
+              gap-3
+              "
             >
-              About
-            </button>
 
-            <ul className="dropdown-menu mt-2">
-              <li><a className="dropdown-item" href="#team">Our Team</a></li>
-              <li><a className="dropdown-item" href="#mission">Our Mission</a></li>
-              <li><a className="dropdown-item" href="#values">Our Values</a></li>
-            </ul>
-          </li>
+              {!isLoggedIn ? (
 
-          {/* CONTACT */}
-          <li className="nav-item dropdown d-none d-md-block">
-            <button
-              className="nav-link dropdown-toggle btn btn-link text-white"
-              data-bs-toggle="dropdown"
-            >
-              Contact us
-            </button>
+                <>
 
-            <ul className="dropdown-menu mt-2">
-              <li className="dropdown-item">Tel: 0716 880 637</li>
-              <li className="dropdown-item">Email: info@elimufiti.co.ke</li>
-            </ul>
-          </li>
+                  <div
+                    className="
+                    partner-pill
+                    "
+                  >
 
-        </ul>
+                    <span
+                      className="
+                      partner-text
+                      "
+                    >
+
+                      Partnered with
+
+                    </span>
+
+                    <img
+                      src={everestLogo}
+                      alt="Everest"
+                      className="
+                      everest-logo
+                      "
+                    />
+
+                  </div>
+
+                  <a
+                    href="/signup"
+                    className="
+                    signin-btn
+                    "
+                  >
+
+                    Sign In
+
+                  </a>
+
+                </>
+
+              ) : (
+
+                <>
+
+                  <span
+                    className="
+                    username
+                    "
+                  >
+
+                    {userName}
+
+                  </span>
+
+                  <button
+                    onClick={clearToken}
+                    className="
+                    power-btn
+                    "
+                  >
+
+                    <i className="bi bi-power"></i>
+
+                  </button>
+
+                </>
+
+              )}
+
+            </div>
+
+          </div>
+
+        </div>
+
       </nav>
 
-      {/* RIGHT SIDE */}
-      <div className="d-flex align-items-center gap-2">
+    </header>
 
-        {!isLoggedIn && (
-          <>
-            <p className="qwitcher-grypen-bold mb-0 d-none d-md-block">
-              elimufiti learning solutions
-            </p>
-
-            <a
-              href="/signup"
-              className="btn btn-sm text-light p-0"
-              style={{ border: "none", background: "transparent" }}
-            >
-              Sign In
-            </a>
-          </>
-        )}
-
-        {isLoggedIn && (
-          <>
-            <span>{userName}</span>
-
-            <button
-              className="btn btn-sm text-light p-0"
-              onClick={clearToken}
-            >
-              <i class="bi bi-power text-danger fs-5"></i>
-            </button>
-          </>
-        )}
-
-      </div>
-
-    </div>
   );
+
 };
 
 export default Header2;

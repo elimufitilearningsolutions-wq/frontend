@@ -155,73 +155,7 @@ const Header2 = ({
               </li>
 
 
-              {/* Solutions */}
-
-              <li
-                className="
-                nav-item
-                dropdown
-                "
-              >
-
-                <a
-                  className="
-                  nav-link
-                  dropdown-toggle
-                  "
-                  data-bs-toggle="dropdown"
-                  href="/"
-                >
-
-                  Solutions
-
-                </a>
-
-                <ul className="dropdown-menu">
-
-                  <li>
-
-                    <a
-                      className="dropdown-item"
-                      href="#solution1"
-                    >
-
-                      Solution 1
-
-                    </a>
-
-                  </li>
-
-                  <li>
-
-                    <a
-                      className="dropdown-item"
-                      href="#solution2"
-                    >
-
-                      Solution 2
-
-                    </a>
-
-                  </li>
-
-                  <li>
-
-                    <a
-                      className="dropdown-item"
-                      href="#solution3"
-                    >
-
-                      Solution 3
-
-                    </a>
-
-                  </li>
-
-                </ul>
-
-              </li>
-
+              
 
               {/* Hub */}
 
@@ -262,14 +196,14 @@ const Header2 = ({
 
                   <li>
 
-                    <a
+                  {  /*<a
                       className="dropdown-item"
                       href="/careers"
                     >
 
                       Job Opportunities
 
-                    </a>
+                    </a> */}
 
                   </li>
 
